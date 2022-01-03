@@ -1,0 +1,39 @@
+{
+  "name": "quizerver",
+  "version": "1.0.0",
+  "description": "Programming (BLACK) Assignment 1: A dynamic website quiz server using node.js and express",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "pretest": "npx eslint *.js",
+    "fix": "npx eslint --fix *.js",
+    "start": "npx nodemon server.js;",
+    "precommit": "npm pretest",
+    "prepush": "npm pretest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tobyrcod/Quizerver.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tobyrcod/Quizerver/issues"
+  },
+  "homepage": "https://github.com/tobyrcod/Quizerver#readme",
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.2.0",
+    "husky": "^7.0.4",
+    "jest": "^27.4.5",
+    "nodemon": "^2.0.15",
+    "supertest": "^6.1.6"
+  },
+  "dependencies": {
+    "express": "^4.17.2",
+    "lodash": "^4.17.21"
+  }
+}
