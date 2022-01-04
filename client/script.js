@@ -1,60 +1,107 @@
-//Get DOM elements
-const button = document.getElementById('btn');
-const txt_question = document.getElementById('question');
-const txt_answer = document.getElementById('answer');
-const txt_author = document.getElementById('author');
+class QuizUI {
+  constructor (divQuiz) {
+    const divFront = divQuiz.querySelector('#front');
+    this.front = {
+      divFront: divFront,
+      txtQuestion: divFront.querySelector('#question'),
+      txtAuthor: divQuiz.querySelector('#author')
+    };
 
-//Quiz Logic
-let currentQuestion = null;
+    // TODO: Break down into more classes/objects instead of this set hell
+    const divBack = divQuiz.querySelector('#back');
+    const divRatings = divBack.querySelector('#ratings');
+    const divlikes = divRatings.querySelector('#likes');
+    const divDislikes = divRatings.querySelector('#dislikes');
+    const likes = {
+      text: divlikes.querySelector('p'),
+      button: divlikes.querySelector('button')
+    };
+    const dislikes = {
+      text: divDislikes.querySelector('p'),
+      button: divDislikes.querySelector('button')
+    };
+    const ratings = {
+      likes: likes,
+      dislikes: dislikes
+    };
+    this.back = {
+      divBack: divBack,
+      txtAnswer: divBack.querySelector('#answer'),
+      divRatings: ratings
+    };
+    this.btnNext = divQuiz.querySelector('#btn');
+  }
+};
 
-button.addEventListener('click', (event) => {
-  Next()
+class Quiz {
+  constructor () {
+    this.currentQuestion = null;
+  }
+}
+
+// Get DOM elements
+const divQuizUI = document.getElementById('quiz');
+const quizUI = new QuizUI(divQuizUI);
+
+// Quiz Logic
+const quiz = new Quiz();
+quizUI.btnNext.addEventListener('click', (event) => {
+  Next();
 });
 
-async function Next() {
-  if (currentQuestion === null) {
-    currentQuestion = await getRandomQuestion();
-    
-    //Write the Question to the Page
-    txt_question.innerHTML = currentQuestion.question;
-    
-    //Get the author of the question
-    author = await getAuthorFromQuestionID(currentQuestion.question_id);
-    txt_author.innerHTML = `- Question From ${author.name}`;
+// TODO: encapsulate all quiz functions inside the quiz class
+async function Next () {
+  if (quiz.currentQuestion === null) {
+    quiz.currentQuestion = await getRandomQuestion();
+    if (quiz.currentQuestion != null) {
+      // Write the Question to the Page
+      quizUI.front.txtQuestion.innerHTML = quiz.currentQuestion.question;
+      // Get the author of the question
+      const author = await getAuthorFromQuestionID(quiz.currentQuestion.question_id);
+      quizUI.front.txtAuthor.innerHTML = `- Question From ${author.name}`;
 
-    txt_answer.innerHTML = '';
-    button.innerHTML = 'Reveal Answer';
-  }
-  else {
+      quizUI.back.divBack.classList.add('hidden');
+      quizUI.back.txtAnswer.innerHTML = '';
+      quizUI.back.divRatings.likes.text.innerHTML = `+ ${quiz.currentQuestion.rating.likes}`;
+      quizUI.back.divRatings.dislikes.text.innerHTML = `- ${quiz.currentQuestion.rating.dislikes}`;
+
+      quizUI.btnNext.innerHTML = 'Reveal Answer';
+    } else {
+      // Coudn't Retrieve a question
+      console.log('Failed to retrieve a question');
+    }
+  } else {
     revealAnswer();
   }
 }
 
-async function getRandomQuestion() {
+async function getRandomQuestion () {
   try {
-    let responce = await fetch('/rq/');
-    let question_json = await responce.text();
-    let question = JSON.parse(question_json);
+    const responce = await fetch('/rq/');
+    const questionJson = await responce.text();
+    const question = JSON.parse(questionJson);
     return await question;
   } catch (e) {
     alert(e);
   }
 }
 
-async function getAuthorFromQuestionID(question_id) {
+async function getAuthorFromQuestionID (questionId) {
   try {
-    let responce = await fetch(`/afqid/${question_id}`);
-    let author_json = await responce.text();
-    let author = JSON.parse(author_json)
+    const responce = await fetch(`/afqid/${questionId}`);
+    const authorJson = await responce.text();
+    const author = JSON.parse(authorJson);
     return author;
   } catch (e) {
     alert(e);
   }
 }
 
-function revealAnswer() {
-  txt_answer.innerHTML = currentQuestion.answer
-  button.innerHTML = 'Next Question';
+function revealAnswer () {
+  quizUI.back.txtAnswer.innerHTML = quiz.currentQuestion.answer;
+  quizUI.btnNext.innerHTML = 'Next Question';
 
-  currentQuestion = null;
+  quizUI.back.divBack.classList.remove('hidden');
+
+  quiz.currentQuestion = null;
 }

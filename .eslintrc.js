@@ -2,7 +2,7 @@ module.exports = {
     extends: 'standard',
     env: {
       jest: true,
-      fetch: false
+      browser: true
     },
     rules: {
       semi: [2, 'always'],

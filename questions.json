@@ -2,26 +2,46 @@
   {
     "question_id":1, 
     "question":"What's 2 + 2?",
-    "answer": "4"
+    "answer": "4",
+    "rating": {
+      "likes": 0,
+      "dislikes": 0
+    }
   },
   {
     "question_id":2, 
     "question":"What is the name of the artist who painted ‘Mona Lisa’?",
-    "answer": "Leonardo Da Vinvi"
+    "answer": "Leonardo Da Vinvi",
+    "rating": {
+      "likes": 50,
+      "dislikes": 0
+    }
   },
   {
     "question_id":3, 
     "question":"Where is Lincoln Memorial situated in America?",
-    "answer": "Washington D.C."
+    "answer": "Washington D.C.",
+    "rating": {
+      "likes": 0,
+      "dislikes": 0
+    }
   },
   {
     "question_id":4, 
     "question":"What is the capital of Brazil?",
-    "answer": "Brasilia"
+    "answer": "Brasilia",
+    "rating": {
+      "likes": 0,
+      "dislikes": 10
+    }
   },
   {
     "question_id":5, 
     "question":"What temperature does water boil at?",
-    "answer": "100 C"
+    "answer": "100 C",
+    "rating": {
+      "likes": 0,
+      "dislikes": 0
+    }
   }
 ]

@@ -23,11 +23,25 @@
     <!--Javascript-->
   </head>
   <body>
-    <p id="question">Start the Quiz now!</p>
-    <div id="reveal-content">
-      <p id="author"></p>
-      <p id="answer"></p>
+    <div id="quiz">
+      <div id="front">
+        <p id="question">Start the Quiz now!</p>
+        <p id="author"></p>
+      </div>
+      <div id="back" class="hidden">
+        <p id="answer"></p>
+        <div id="ratings">
+          <div id="likes">
+            <p>[likes amount]</p> 
+            <button>upvote</button>
+          </div>
+          <div id="dislikes">
+            <p>[dislikes amount]</p> 
+            <button>downvote</button>
+          </div>
+        </div>
+      </div>
+      <button id="btn">Start Quiz</button>
     </div>
-    <button id="btn">Start Quiz</button>
   </body>
 </html>
