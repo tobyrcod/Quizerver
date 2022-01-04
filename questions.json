@@ -1,0 +1,27 @@
+[
+  {
+    "question_id":1, 
+    "question":"What's 2 + 2?",
+    "answer": "4"
+  },
+  {
+    "question_id":2, 
+    "question":"What is the name of the artist who painted ‘Mona Lisa’?",
+    "answer": "Leonardo Da Vinvi"
+  },
+  {
+    "question_id":3, 
+    "question":"Where is Lincoln Memorial situated in America?",
+    "answer": "Washington D.C."
+  },
+  {
+    "question_id":4, 
+    "question":"What is the capital of Brazil?",
+    "answer": "Brasilia"
+  },
+  {
+    "question_id":5, 
+    "question":"What temperature does water boil at?",
+    "answer": "100 C"
+  }
+]

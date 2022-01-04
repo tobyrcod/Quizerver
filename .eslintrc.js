@@ -1,7 +1,8 @@
 module.exports = {
     extends: 'standard',
     env: {
-      jest: true
+      jest: true,
+      fetch: false
     },
     rules: {
       semi: [2, 'always'],
