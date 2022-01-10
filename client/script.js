@@ -29,6 +29,7 @@ class QuizUI {
       txtAnswer: divBack.querySelector('#answer'),
       divRatings: ratings
     };
+    this.txtError = divQuiz.querySelector('#error');
     this.btnNext = divQuiz.querySelector('#btn');
   }
 };
@@ -51,14 +52,19 @@ quizUI.btnNext.addEventListener('click', (event) => {
 
 // TODO: encapsulate all quiz functions inside the quiz class
 async function Next () {
+  // If we don't have a question
   if (quiz.currentQuestion === null) {
+    // Get a new Random Question
     quiz.currentQuestion = await getRandomQuestion();
+    // If there where no errors getting a new question
     if (quiz.currentQuestion != null) {
-      // Write the Question to the Page
-      quizUI.front.txtQuestion.innerHTML = quiz.currentQuestion.question;
       // Get the author of the question
       const author = await getAuthorFromQuestionID(quiz.currentQuestion.question_id);
-      quizUI.front.txtAuthor.innerHTML = `- Question From ${author.name}`;
+      const authorName = (author === null) ? 'Unknown Author' : author.name;
+      quizUI.front.txtAuthor.innerHTML = `- Question From ${authorName}`;
+
+      // Write the Question to the Page
+      quizUI.front.txtQuestion.innerHTML = quiz.currentQuestion.question;
 
       quizUI.back.divBack.classList.add('hidden');
       quizUI.back.txtAnswer.innerHTML = '';
@@ -66,9 +72,15 @@ async function Next () {
       quizUI.back.divRatings.dislikes.text.innerHTML = `- ${quiz.currentQuestion.rating.dislikes}`;
 
       quizUI.btnNext.innerHTML = 'Reveal Answer';
+
+      // No Errors Detected
+      quizUI.txtError.innerHTML = '';
+      quizUI.txtError.classList.add('hidden');
     } else {
       // Coudn't Retrieve a question
       console.log('Failed to retrieve a question');
+      quizUI.txtError.innerHTML = 'Server is Unresponsive, Please try again';
+      quizUI.txtError.classList.remove('hidden');
     }
   } else {
     revealAnswer();
@@ -83,6 +95,7 @@ async function getRandomQuestion () {
     return await question;
   } catch (e) {
     alert(e);
+    return null;
   }
 }
 
@@ -94,6 +107,7 @@ async function getAuthorFromQuestionID (questionId) {
     return author;
   } catch (e) {
     alert(e);
+    return null;
   }
 }
 
