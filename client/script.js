@@ -30,92 +30,134 @@ class QuizUI {
       divRatings: ratings
     };
     this.txtError = divQuiz.querySelector('#error');
-    this.btnNext = divQuiz.querySelector('#btn');
+    this.btnProceed = divQuiz.querySelector('#btn');
+  };
+
+  Initialise (quiz) {
+    // UI Responce to Events
+
+    // On Recieved New Question Event
+    document.addEventListener('ornqe', (e) => {
+      const newQuestion = e.detail.question;
+      if (newQuestion != null) {
+        // Write the Question to the Page
+        this.front.txtQuestion.innerHTML = newQuestion.question;
+
+        this.back.divBack.classList.add('hidden');
+        this.back.txtAnswer.innerHTML = '';
+        this.back.divRatings.likes.text.innerHTML = `+ ${newQuestion.rating.likes}`;
+        this.back.divRatings.dislikes.text.innerHTML = `- ${newQuestion.rating.dislikes}`;
+
+        this.btnProceed.innerHTML = 'Reveal Answer';
+
+        // No Errors Detected
+        this.txtError.innerHTML = '';
+        this.txtError.classList.add('hidden');
+      } else {
+        // Coudn't Retrieve a question
+        this.txtError.innerHTML = 'Server is Unresponsive, Please try again';
+        this.txtError.classList.remove('hidden');
+      }
+    });
+    // On Recieved Author Event
+    document.addEventListener('orae', (e) => {
+      const author = e.detail.author;
+      const authorName = (author === null) ? 'Unknown Author' : author.name;
+      this.front.txtAuthor.innerHTML = `- Question From ${authorName}`;
+    });
+    // Clicked Like Button
+    this.back.divRatings.likes.button.addEventListener('click', (event) => {
+      alert('upvote');
+    });
+    // Clicked Dislike Button
+    this.back.divRatings.dislikes.button.addEventListener('click', (event) => {
+      alert('downvote');
+    });
+
+    // Proceed Button
+    this.btnProceed.addEventListener('click', (event) => {
+      if (quiz.currentQuestionInfo === null) {
+        quiz.UpdateQuestionInfo();
+      } else {
+        this.RevealAnswer();
+      }
+    });
   }
+
+  RevealAnswer () {
+    this.back.txtAnswer.innerHTML = quiz.currentQuestionInfo.question.answer;
+    this.btnProceed.innerHTML = 'Next Question';
+    this.back.divBack.classList.remove('hidden');
+
+    quiz.currentQuestionInfo = null;
+  };
 };
 
+class QuestionInfo {
+  constructor (question, author) {
+    this.question = question;
+    this.author = author;
+  };
+}
 class Quiz {
   constructor () {
-    this.currentQuestion = null;
+    this.currentQuestionInfo = null;
   }
-}
 
-// Get DOM elements
-const divQuizUI = document.getElementById('quiz');
-const quizUI = new QuizUI(divQuizUI);
+  // TODO: Figure out how to make this method private
+  async GetRandomQuestion () {
+    try {
+      const responce = await fetch('/rq/');
+      const questionJson = await responce.text();
+      const question = JSON.parse(questionJson);
+      return await question;
+    } catch (e) {
+      return null;
+    }
+  };
+
+  // TODO: Figure out how to make this method private
+  async GetAuthorFromQuestionID (questionId) {
+    try {
+      const responce = await fetch(`/afqid/${questionId}`);
+      const authorJson = await responce.text();
+      const author = JSON.parse(authorJson);
+      return author;
+    } catch (e) {
+      return null;
+    }
+  };
+
+  UpdateCurrentQuestionInfo (newQuestionInfo) {
+    this.currentQuestionInfo = newQuestionInfo;
+  }
+
+  async UpdateQuestionInfo () {
+    // Get a new Random Question
+    const newQuestion = await this.GetRandomQuestion();
+    const OnRetrievedNewQuestionEvent = new CustomEvent('ornqe', {
+      detail: { question: newQuestion }
+    });
+    document.dispatchEvent(OnRetrievedNewQuestionEvent);
+    // If there where no errors getting a new question
+    if (newQuestion != null) {
+      // Get the author of the question
+      const author = await this.GetAuthorFromQuestionID(newQuestion.question_id);
+      const OnRetrievedAuthorEvent = new CustomEvent('orae', {
+        detail: { author: author }
+      });
+      document.dispatchEvent(OnRetrievedAuthorEvent);
+
+      this.UpdateCurrentQuestionInfo(new QuestionInfo(newQuestion, author));
+    };
+  };
+};
 
 // Quiz Logic
 const quiz = new Quiz();
-quizUI.btnNext.addEventListener('click', (event) => {
-  Next();
-});
 
-// TODO: encapsulate all quiz functions inside the quiz class
-async function Next () {
-  // If we don't have a question
-  if (quiz.currentQuestion === null) {
-    // Get a new Random Question
-    quiz.currentQuestion = await getRandomQuestion();
-    // If there where no errors getting a new question
-    if (quiz.currentQuestion != null) {
-      // Get the author of the question
-      const author = await getAuthorFromQuestionID(quiz.currentQuestion.question_id);
-      const authorName = (author === null) ? 'Unknown Author' : author.name;
-      quizUI.front.txtAuthor.innerHTML = `- Question From ${authorName}`;
-
-      // Write the Question to the Page
-      quizUI.front.txtQuestion.innerHTML = quiz.currentQuestion.question;
-
-      quizUI.back.divBack.classList.add('hidden');
-      quizUI.back.txtAnswer.innerHTML = '';
-      quizUI.back.divRatings.likes.text.innerHTML = `+ ${quiz.currentQuestion.rating.likes}`;
-      quizUI.back.divRatings.dislikes.text.innerHTML = `- ${quiz.currentQuestion.rating.dislikes}`;
-
-      quizUI.btnNext.innerHTML = 'Reveal Answer';
-
-      // No Errors Detected
-      quizUI.txtError.innerHTML = '';
-      quizUI.txtError.classList.add('hidden');
-    } else {
-      // Coudn't Retrieve a question
-      console.log('Failed to retrieve a question');
-      quizUI.txtError.innerHTML = 'Server is Unresponsive, Please try again';
-      quizUI.txtError.classList.remove('hidden');
-    }
-  } else {
-    revealAnswer();
-  }
-}
-
-async function getRandomQuestion () {
-  try {
-    const responce = await fetch('/rq/');
-    const questionJson = await responce.text();
-    const question = JSON.parse(questionJson);
-    return await question;
-  } catch (e) {
-    alert(e);
-    return null;
-  }
-}
-
-async function getAuthorFromQuestionID (questionId) {
-  try {
-    const responce = await fetch(`/afqid/${questionId}`);
-    const authorJson = await responce.text();
-    const author = JSON.parse(authorJson);
-    return author;
-  } catch (e) {
-    alert(e);
-    return null;
-  }
-}
-
-function revealAnswer () {
-  quizUI.back.txtAnswer.innerHTML = quiz.currentQuestion.answer;
-  quizUI.btnNext.innerHTML = 'Next Question';
-
-  quizUI.back.divBack.classList.remove('hidden');
-
-  quiz.currentQuestion = null;
-}
+// Get DOM elements
+// Quiz UI
+const divQuizUI = document.getElementById('quiz');
+const quizUI = new QuizUI(divQuizUI);
+quizUI.Initialise(quiz);
