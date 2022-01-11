@@ -1,47 +1,74 @@
 [
   {
-    "question_id": 1,
-    "question": "What's 2 + 2?",
-    "answer": "4",
+    "question_id": 0,
+    "question": "zdfg",
+    "answer": "zdfg",
     "rating": {
-      "likes": 28,
+      "likes": 0,
       "dislikes": 0
     }
   },
   {
-    "question_id": 2,
-    "question": "What is the name of the artist who painted ‘Mona Lisa’?",
-    "answer": "Leonardo Da Vinvi",
+    "question_id": 1,
+    "question": "Dead or alive?",
+    "answer": "alive\n",
     "rating": {
-      "likes": 90,
-      "dislikes": 4
+      "likes": 3,
+      "dislikes": 3
+    }
+  },
+  {
+    "question_id": 2,
+    "question": "what is my name?",
+    "answer": "joe",
+    "rating": {
+      "likes": 2,
+      "dislikes": 3
     }
   },
   {
     "question_id": 3,
-    "question": "Where is Lincoln Memorial situated in America?",
-    "answer": "Washington D.C.",
+    "question": "5+5=?",
+    "answer": "10",
     "rating": {
-      "likes": 5,
-      "dislikes": 7
+      "likes": 2,
+      "dislikes": 2
     }
   },
   {
     "question_id": 4,
-    "question": "What is the capital of Brazil?",
-    "answer": "Brasilia",
+    "question": "5+5=?",
+    "answer": "10",
     "rating": {
-      "likes": 26,
-      "dislikes": 25
+      "likes": 0,
+      "dislikes": 0
     }
   },
   {
     "question_id": 5,
-    "question": "What temperature does water boil at?",
-    "answer": "100 C",
+    "question": "5+5=?",
+    "answer": "10",
     "rating": {
-      "likes": 27,
-      "dislikes": 13
+      "likes": 0,
+      "dislikes": 0
+    }
+  },
+  {
+    "question_id": 6,
+    "question": "Joe who?",
+    "answer": "mama",
+    "rating": {
+      "likes": 0,
+      "dislikes": 0
+    }
+  },
+  {
+    "question_id": 7,
+    "question": "What does PC stand for in the FDE cycle?",
+    "answer": "Program Counter",
+    "rating": {
+      "likes": 0,
+      "dislikes": 0
     }
   }
 ]

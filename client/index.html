@@ -20,10 +20,12 @@
 
     <!--Javascript-->
     <script src="script.js" defer></script>
+    <script src="quiz.js" defer></script>
+    <script src="add_question.js" defer></script>
     <!--Javascript-->
   </head>
   <body>
-    <div id="quiz">
+    <div id="quiz" class="hidden">
       <div id="front">
         <p id="question">Start the Quiz now!</p>
         <p id="author"></p>
@@ -44,5 +46,17 @@
       <p id="error" class="hidden"></p>
       <button id="btn">Start Quiz</button>
     </div>
+    <div id="add_question">
+      <form action="/add-question" method="POST">
+        <label for="question">Question: </label>
+        <textarea name="question" id="question"></textarea>
+        <label for="answer">Answer: </label>
+        <textarea name="answer" id="answer"></textarea>
+        <label for="author">Author name: </label>
+        <input type="text" name="authorName" id="authorName">
+        <button>Submit</button>
+      </form>
+    </div>
+    <button id="switch">Switch to Other Page</button>
   </body>
 </html>

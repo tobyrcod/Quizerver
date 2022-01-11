@@ -1,27 +1,42 @@
 [
   {
+    "ownership_id": 0,
+    "question_id": 0,
+    "author_id": 0
+  },
+  {
     "ownership_id": 1,
-    "question_id":1,
-    "author_id": 1
+    "question_id": 1,
+    "author_id": 0
   },
   {
     "ownership_id": 2,
-    "question_id":2,
+    "question_id": 2,
     "author_id": 1
   },
   {
     "ownership_id": 3,
-    "question_id":3,
+    "question_id": 3,
     "author_id": 2
   },
   {
     "ownership_id": 4,
-    "question_id":4,
-    "author_id": 3
+    "question_id": 4,
+    "author_id": 2
   },
   {
     "ownership_id": 5,
-    "question_id":5,
-    "author_id": 1
+    "question_id": 5,
+    "author_id": 2
+  },
+  {
+    "ownership_id": 6,
+    "question_id": 6,
+    "author_id": 3
+  },
+  {
+    "ownership_id": 7,
+    "question_id": 7,
+    "author_id": 4
   }
 ]

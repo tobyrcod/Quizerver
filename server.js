@@ -8,6 +8,7 @@ app.use(express.json({ limit: '1mb' }));
 app.use(express.urlencoded({ extended: true }));
 
 const JSONpath = 'JSON/';
+const info = JSON.parse(fs.readFileSync(JSONpath + 'info.json'));
 const questions = JSON.parse(fs.readFileSync(JSONpath + 'questions.json'));
 const authors = JSON.parse(fs.readFileSync(JSONpath + 'authors.json'));
 const ownerships = JSON.parse(fs.readFileSync(JSONpath + 'ownerships.json'));
@@ -52,6 +53,78 @@ app.post('/downvote', (req, res) => {
     data: {
       dislikes: questions[questionIndex].rating.dislikes
     }
+  });
+});
+
+// TODO: abstract file management methods to a
+// 'Database' object
+function MakeNewAuthor (authorName) {
+  const authorId = info.author_info.counter;
+  info.author_info.counter += 1;
+
+  const newAuthor = {
+    author_id: authorId,
+    name: authorName
+  };
+
+  authors.push(newAuthor);
+  fs.writeFileSync(JSONpath + 'authors.json', JSON.stringify(authors, null, 2));
+
+  // Return the index of the new author
+  return authors.length - 1;
+}
+
+function MakeNewQuestion (question, answer, authorName) {
+  const questionId = info.question_info.counter;
+  info.question_info.counter += 1;
+
+  const newQuestion = {
+    question_id: questionId,
+    question: question,
+    answer: answer,
+    rating: {
+      likes: 0,
+      dislikes: 0
+    }
+  };
+
+  questions.push(newQuestion);
+
+  // Get the index of the author from the name
+  let authorIndex = authors.findIndex(author => author.name === authorName);
+  // If they dont already exist
+  if (authorIndex === -1) {
+    // Make a new author with the given name
+    authorIndex = MakeNewAuthor(authorName);
+  }
+  // Get the Id of the author at that index
+  const authorId = authors[authorIndex].author_id;
+
+  // Get a new unique ownershipID
+  const ownershipId = info.ownership_info.counter;
+  info.ownership_info.counter += 1;
+
+  const newOwnership = {
+    ownership_id: ownershipId,
+    question_id: questionId,
+    author_id: authorId
+  };
+  ownerships.push(newOwnership);
+
+  fs.writeFileSync(JSONpath + 'ownerships.json', JSON.stringify(ownerships, null, 2));
+  fs.writeFileSync(JSONpath + 'questions.json', JSON.stringify(questions, null, 2));
+  fs.writeFileSync(JSONpath + 'info.json', JSON.stringify(info, null, 2));
+}
+
+app.post('/add-question/', (req, res) => {
+  const query = req.query;
+  console.log(query);
+
+  MakeNewQuestion(query.question, query.answer, query.authorName);
+
+  // Send a Responce to the POST request
+  res.json({
+    status: 'success'
   });
 });
 
