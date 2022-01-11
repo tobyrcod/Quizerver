@@ -67,17 +67,24 @@ class QuizUI {
     });
     // Clicked Like Button
     this.back.divRatings.likes.button.addEventListener('click', (event) => {
-      alert('upvote');
+      quiz.UpvoteCurrentQuestion();
+    });
+    // On Likes Count Updated Event
+    document.addEventListener('olcue', (e) => {
+      this.back.divRatings.likes.text.innerHTML = `+ ${e.detail.newLikesCount}`;
     });
     // Clicked Dislike Button
     this.back.divRatings.dislikes.button.addEventListener('click', (event) => {
-      alert('downvote');
+      quiz.DownvoteCurrentQuestion();
     });
-
+    // On Dislikes Count Updated Event
+    document.addEventListener('odcue', (e) => {
+      this.back.divRatings.dislikes.text.innerHTML = `- ${e.detail.newDislikesCount}`;
+    });
     // Proceed Button
     this.btnProceed.addEventListener('click', (event) => {
-      if (quiz.currentQuestionInfo === null) {
-        quiz.UpdateQuestionInfo();
+      if (quiz.currentQuestion === null || quiz.HasAnsweredQuestion(quiz.currentQuestion)) {
+        quiz.UpdateQuestion();
       } else {
         this.RevealAnswer();
       }
@@ -85,23 +92,17 @@ class QuizUI {
   }
 
   RevealAnswer () {
-    this.back.txtAnswer.innerHTML = quiz.currentQuestionInfo.question.answer;
+    this.back.txtAnswer.innerHTML = quiz.currentQuestion.answer;
     this.btnProceed.innerHTML = 'Next Question';
     this.back.divBack.classList.remove('hidden');
-
-    quiz.currentQuestionInfo = null;
+    quiz.answeredQuestions.push(quiz.currentQuestion);
   };
 };
 
-class QuestionInfo {
-  constructor (question, author) {
-    this.question = question;
-    this.author = author;
-  };
-}
 class Quiz {
   constructor () {
-    this.currentQuestionInfo = null;
+    this.currentQuestion = null;
+    this.answeredQuestions = [];
   }
 
   // TODO: Figure out how to make this method private
@@ -128,11 +129,11 @@ class Quiz {
     }
   };
 
-  UpdateCurrentQuestionInfo (newQuestionInfo) {
-    this.currentQuestionInfo = newQuestionInfo;
+  HasAnsweredQuestion (question) {
+    return this.answeredQuestions.includes(question);
   }
 
-  async UpdateQuestionInfo () {
+  async UpdateQuestion () {
     // Get a new Random Question
     const newQuestion = await this.GetRandomQuestion();
     const OnRetrievedNewQuestionEvent = new CustomEvent('ornqe', {
@@ -148,9 +149,59 @@ class Quiz {
       });
       document.dispatchEvent(OnRetrievedAuthorEvent);
 
-      this.UpdateCurrentQuestionInfo(new QuestionInfo(newQuestion, author));
+      this.currentQuestion = newQuestion;
     };
   };
+
+  async UpvoteCurrentQuestion () {
+    try {
+      // POST Request with Fetch()
+      // https://www.youtube.com/watch?v=Kw5tC5nQMRY
+      const data = { question_id: this.currentQuestion.question_id };
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      };
+      const responce = await fetch('/upvote', options);
+      const json = await responce.json();
+      const newLikesCount = json.data.likes;
+      const OnLikesCountUpdatedEvent = new CustomEvent('olcue', {
+        detail: { newLikesCount: newLikesCount }
+      });
+      document.dispatchEvent(OnLikesCountUpdatedEvent);
+    } catch (e) {
+      // TODO: Return true or false so the UI can handle it
+      return null;
+    }
+  }
+
+  async DownvoteCurrentQuestion () {
+    try {
+      // POST Request with Fetch()
+      // https://www.youtube.com/watch?v=Kw5tC5nQMRY
+      const data = { question_id: this.currentQuestion.question_id };
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      };
+      const responce = await fetch('/downvote', options);
+      const json = await responce.json();
+      const newDislikesCount = json.data.dislikes;
+      const OnDislikesCountUpdatedEvent = new CustomEvent('odcue', {
+        detail: { newDislikesCount: newDislikesCount }
+      });
+      document.dispatchEvent(OnDislikesCountUpdatedEvent);
+    } catch (e) {
+      // TODO: Return true or false so the UI can handle it
+      return null;
+    }
+  }
 };
 
 // Quiz Logic
