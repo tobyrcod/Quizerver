@@ -29,17 +29,27 @@ class QuizUI {
       txtAnswer: divBack.querySelector('#answer'),
       divRatings: ratings
     };
+    // TODO: break hiding and showing of all buttons and text and what not for
+    // start / ask / reveal answer into a method
+    this.txtTopText = divQuiz.querySelector('#top_text');
     this.txtError = divQuiz.querySelector('#error');
-    this.btnProceed = divQuiz.querySelector('#btn');
+    this.btnAskQuestion = divQuiz.querySelector('#btn_ask_question');
+    this.btnRevealAnswer = divQuiz.querySelector('#btn_reveal_answer');
+    this.btnStartQuiz = divQuiz.querySelector('#btn_start_quiz');
+    this.btnEndQuiz = divQuiz.querySelector('#btn_end_quiz');
   };
 
   Initialise (quiz) {
     // UI Responce to Events
 
-    // On Recieved New Question Event
-    document.addEventListener('ornqe', (e) => {
+    // On Ask Question Event
+    document.addEventListener('OnAskQuestionEvent', (e) => {
       const newQuestion = e.detail.question;
       if (newQuestion != null) {
+        // Change the Top Text
+        // TODO: replace the quiz methods with actual quiz method things to get thing
+        this.txtTopText.innerHTML = `Question # ${quiz.currentQuestionIndex + 1} / ${quiz.questionSet.length}`;
+
         // Write the Question to the Page
         this.front.txtQuestion.innerHTML = newQuestion.question;
 
@@ -48,7 +58,8 @@ class QuizUI {
         this.back.divRatings.likes.text.innerHTML = `+ ${newQuestion.rating.likes}`;
         this.back.divRatings.dislikes.text.innerHTML = `- ${newQuestion.rating.dislikes}`;
 
-        this.btnProceed.innerHTML = 'Reveal Answer';
+        this.btnRevealAnswer.classList.remove('hidden');
+        this.btnAskQuestion.classList.add('hidden');
 
         // No Errors Detected
         this.txtError.innerHTML = '';
@@ -60,7 +71,7 @@ class QuizUI {
       }
     });
     // On Recieved Author Event
-    document.addEventListener('orae', (e) => {
+    document.addEventListener('OnReceiveAuthorEvent', (e) => {
       const author = e.detail.author;
       const authorName = (author === null) ? 'Unknown Author' : author.name;
       this.front.txtAuthor.innerHTML = `- Question From ${authorName}`;
@@ -81,44 +92,105 @@ class QuizUI {
     document.addEventListener('odcue', (e) => {
       this.back.divRatings.dislikes.text.innerHTML = `- ${e.detail.newDislikesCount}`;
     });
-    // Proceed Button
-    this.btnProceed.addEventListener('click', (event) => {
-      if (quiz.currentQuestion === null || quiz.HasAnsweredQuestion(quiz.currentQuestion)) {
-        quiz.UpdateQuestion();
-      } else {
-        this.RevealAnswer();
+    // Button that Starts the Quiz
+    this.btnStartQuiz.addEventListener('click', async function (event) {
+      // Get the question set
+      if (quiz.questionSet === null) {
+        const error = await quiz.InitializeQuestionSet();
+        if (error) {
+          // TODO: make this message visible to user
+          quizUI.txtError.innerHTML = error.message;
+          quizUI.txtError.classList.remove('hidden');
+        } else {
+          quiz.AskNextQuestion();
+          quizUI.front.divFront.classList.remove('hidden');
+          quizUI.btnStartQuiz.classList.add('hidden');
+        }
       }
+    });
+    // Button That gets the next question
+    this.btnAskQuestion.addEventListener('click', function (event) {
+      // Ask the question
+      quiz.AskNextQuestion();
+    });
+    // Button that Reveals the answer
+    this.btnRevealAnswer.addEventListener('click', (event) => {
+      this.RevealAnswer();
     });
   }
 
   RevealAnswer () {
     this.back.txtAnswer.innerHTML = quiz.currentQuestion.answer;
-    this.btnProceed.innerHTML = 'Next Question';
+    this.btnAskQuestion.innerHTML = 'Next Question';
     this.back.divBack.classList.remove('hidden');
-    quiz.answeredQuestions.push(quiz.currentQuestion);
+    this.btnRevealAnswer.classList.add('hidden');
+    // TODO: abstract final question logic inside quiz
+    // If we just revealed the answer for the final question
+    if (quiz.currentQuestionIndex >= quiz.questionSet.length - 1) {
+      this.btnEndQuiz.classList.remove('hidden');
+    } else {
+      // We have more questions to ask
+      this.btnAskQuestion.classList.remove('hidden');
+    }
   };
 };
 
 class Quiz {
   constructor () {
+    this.currentQuestionIndex = -1;
+    this.questionSet = null;
+
     this.currentQuestion = null;
-    this.answeredQuestions = [];
   }
 
-  // TODO: Figure out how to make this method private
-  async GetRandomQuestion () {
+  async AskNextQuestion () {
+    // CurrentQuestionIndex refers to the last question we got for certain from the server
+    console.log(`remaining ${this.currentQuestionIndex} / ${this.questionSet.length}`);
+    if (this.currentQuestionIndex >= this.questionSet.length - 1) {
+      // We have reached the end of the question set
+      console.log('end of questiosn0000');
+    } else {
+      // Get the next Question from the server
+      const newQuestion = await this.GetQuestionFromQuestionId(this.questionSet[this.currentQuestionIndex + 1]);
+
+      // If the request was valid
+      if (newQuestion != null) {
+        // We are now on the next question
+        this.currentQuestionIndex += 1;
+        this.currentQuestion = newQuestion;
+        // Get the author of the question
+        const author = await this.GetAuthorFromQuestionId(newQuestion.question_id);
+        const OnRetrievedAuthorEvent = new CustomEvent('OnReceiveAuthorEvent', {
+          detail: { author: author }
+        });
+        document.dispatchEvent(OnRetrievedAuthorEvent);
+      }
+
+      const OnAskQuestionEvent = new CustomEvent('OnAskQuestionEvent', {
+        detail: {
+          question: newQuestion
+        }
+      });
+      document.dispatchEvent(OnAskQuestionEvent);
+    }
+  }
+
+  async GetQuestionFromQuestionId (questionId) {
     try {
-      const responce = await fetch('/rq/');
-      const questionJson = await responce.text();
-      const question = JSON.parse(questionJson);
-      return await question;
+      const responce = await fetch(`/qfqid/${questionId}`);
+      // TODO: add this line to every time i use fetch
+      if (responce.status === 404) {
+        throw new Error('404 Error!');
+      }
+      const question = await responce.text();
+      return JSON.parse(question);
     } catch (e) {
       return null;
     }
-  };
+  }
 
   // TODO: Figure out how to make this method private
-  async GetAuthorFromQuestionID (questionId) {
+  async GetAuthorFromQuestionId (questionId) {
     try {
       const responce = await fetch(`/afqid/${questionId}`);
       const authorJson = await responce.text();
@@ -129,35 +201,27 @@ class Quiz {
     }
   };
 
-  HasAnsweredQuestion (question) {
-    return this.answeredQuestions.includes(question);
+  // TODO: Add parameters for only questions that match some conditions
+  async InitializeQuestionSet () {
+    try {
+      const responce = await fetch('/qs/');
+      const questionSetText = await responce.text();
+      const questionSet = JSON.parse(questionSetText);
+      if (questionSet.length <= 0) {
+        return new Error('No Questions Avaliable');
+      }
+      this.questionSet = questionSet;
+      return false;
+    } catch (e) {
+      return new Error('Unable to Connect to Server, Please try again');
+    }
   }
-
-  async UpdateQuestion () {
-    // Get a new Random Question
-    const newQuestion = await this.GetRandomQuestion();
-    const OnRetrievedNewQuestionEvent = new CustomEvent('ornqe', {
-      detail: { question: newQuestion }
-    });
-    document.dispatchEvent(OnRetrievedNewQuestionEvent);
-    // If there where no errors getting a new question
-    if (newQuestion != null) {
-      // Get the author of the question
-      const author = await this.GetAuthorFromQuestionID(newQuestion.question_id);
-      const OnRetrievedAuthorEvent = new CustomEvent('orae', {
-        detail: { author: author }
-      });
-      document.dispatchEvent(OnRetrievedAuthorEvent);
-
-      this.currentQuestion = newQuestion;
-    };
-  };
 
   async UpvoteCurrentQuestion () {
     try {
       // POST Request with Fetch()
       // https://www.youtube.com/watch?v=Kw5tC5nQMRY
-      const data = { question_id: this.currentQuestion.question_id };
+      const data = { question_id: this.questionSet[this.currentQuestionIndex] };
       const options = {
         method: 'POST',
         headers: {
@@ -182,7 +246,7 @@ class Quiz {
     try {
       // POST Request with Fetch()
       // https://www.youtube.com/watch?v=Kw5tC5nQMRY
-      const data = { question_id: this.currentQuestion.question_id };
+      const data = { question_id: this.questionSet[this.currentQuestionIndex] };
       const options = {
         method: 'POST',
         headers: {

@@ -1,74 +1,29 @@
 [
   {
     "question_id": 0,
-    "question": "zdfg",
-    "answer": "zdfg",
-    "rating": {
-      "likes": 0,
-      "dislikes": 0
-    }
-  },
-  {
-    "question_id": 1,
-    "question": "Dead or alive?",
-    "answer": "alive\n",
+    "question": "What is 3+2?",
+    "answer": "5",
     "rating": {
       "likes": 3,
       "dislikes": 3
     }
   },
   {
+    "question_id": 1,
+    "question": "What is 7+9?",
+    "answer": "16",
+    "rating": {
+      "likes": 5,
+      "dislikes": 0
+    }
+  },
+  {
     "question_id": 2,
-    "question": "what is my name?",
-    "answer": "joe",
-    "rating": {
-      "likes": 2,
-      "dislikes": 3
-    }
-  },
-  {
-    "question_id": 3,
-    "question": "5+5=?",
-    "answer": "10",
-    "rating": {
-      "likes": 2,
-      "dislikes": 2
-    }
-  },
-  {
-    "question_id": 4,
-    "question": "5+5=?",
-    "answer": "10",
-    "rating": {
-      "likes": 0,
-      "dislikes": 0
-    }
-  },
-  {
-    "question_id": 5,
-    "question": "5+5=?",
-    "answer": "10",
-    "rating": {
-      "likes": 0,
-      "dislikes": 0
-    }
-  },
-  {
-    "question_id": 6,
-    "question": "Joe who?",
-    "answer": "mama",
-    "rating": {
-      "likes": 0,
-      "dislikes": 0
-    }
-  },
-  {
-    "question_id": 7,
-    "question": "What does PC stand for in the FDE cycle?",
+    "question": "What does 'PC' mean?",
     "answer": "Program Counter",
     "rating": {
       "likes": 0,
-      "dislikes": 0
+      "dislikes": 1
     }
   }
 ]

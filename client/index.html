@@ -25,9 +25,13 @@
     <!--Javascript-->
   </head>
   <body>
-    <div id="quiz" class="hidden">
-      <div id="front">
-        <p id="question">Start the Quiz now!</p>
+    <!--TODO?: Stop using my 'hidden' class and just remove the elements
+    from the DOM in JS. '?' because this is a lot simpler and allows for quick switching/resuming
+    to other pages, with the only downside being security, which we dont need to worry about-->
+    <div id="quiz">
+      <p id="top_text">Start the Quiz now!</p>
+      <div id="front" class="hidden">
+        <p id="question"></p>
         <p id="author"></p>
       </div>
       <div id="back" class="hidden">
@@ -44,9 +48,12 @@
         </div>
       </div>
       <p id="error" class="hidden"></p>
-      <button id="btn">Start Quiz</button>
+      <button id="btn_ask_question" class="hidden">Next Question</button>
+      <button id="btn_reveal_answer" class="hidden">Reveal Answer</button>
+      <button id="btn_end_quiz" class="hidden">End Quiz</button>
+      <button id="btn_start_quiz">Start Quiz</button>
     </div>
-    <div id="add_question">
+    <div id="add_question" class="hidden">
       <form action="/add-question" method="POST">
         <label for="question">Question: </label>
         <textarea name="question" id="question"></textarea>

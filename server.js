@@ -13,10 +13,32 @@ const questions = JSON.parse(fs.readFileSync(JSONpath + 'questions.json'));
 const authors = JSON.parse(fs.readFileSync(JSONpath + 'authors.json'));
 const ownerships = JSON.parse(fs.readFileSync(JSONpath + 'ownerships.json'));
 
-app.get('/rq', (req, res) => {
-  res.json(questions[_.random(0, questions.length - 1)]);
+app.get('/qs/', (req, res) => {
+  // Deep copy the questions
+  // TODO: make the questionSet some sub set of all questions depending on some criteria
+  let questionSet = [];
+  questions.forEach(element => {
+    questionSet.push(element.question_id);
+  });
+
+  // Randomise the order of the question set
+  // Fisher–Yates shuffle
+  questionSet = _.shuffle(questionSet);
+
+  // Return the question set to the user
+  res.json(questionSet);
 });
 
+// TODO: add error trapping to this!
+app.get('/qfqid/:id', (req, res) => {
+  const params = req.params;
+  console.log(params);
+  const questionId = parseInt(params.id);
+  const question = questions.find(question => question.question_id === questionId);
+  res.json(question);
+});
+
+// TODO: add error trapping to this!
 app.get('/afqid/:id', (req, res) => {
   const params = req.params;
   const questionId = parseInt(params.id);
@@ -74,6 +96,8 @@ function MakeNewAuthor (authorName) {
   return authors.length - 1;
 }
 
+// TODO: abstract file management methods to a
+// 'Database' object
 function MakeNewQuestion (question, answer, authorName) {
   const questionId = info.question_info.counter;
   info.question_info.counter += 1;
@@ -100,6 +124,17 @@ function MakeNewQuestion (question, answer, authorName) {
   // Get the Id of the author at that index
   const authorId = authors[authorIndex].author_id;
 
+  // Add a new ownership to the database
+  MakeNewOwnership(questionId, authorId);
+
+  fs.writeFileSync(JSONpath + 'ownerships.json', JSON.stringify(ownerships, null, 2));
+  fs.writeFileSync(JSONpath + 'questions.json', JSON.stringify(questions, null, 2));
+  fs.writeFileSync(JSONpath + 'info.json', JSON.stringify(info, null, 2));
+}
+
+// TODO: abstract file management methods to a
+// 'Database' object
+function MakeNewOwnership (questionId, authorId) {
   // Get a new unique ownershipID
   const ownershipId = info.ownership_info.counter;
   info.ownership_info.counter += 1;
@@ -110,10 +145,6 @@ function MakeNewQuestion (question, answer, authorName) {
     author_id: authorId
   };
   ownerships.push(newOwnership);
-
-  fs.writeFileSync(JSONpath + 'ownerships.json', JSON.stringify(ownerships, null, 2));
-  fs.writeFileSync(JSONpath + 'questions.json', JSON.stringify(questions, null, 2));
-  fs.writeFileSync(JSONpath + 'info.json', JSON.stringify(info, null, 2));
 }
 
 app.post('/add-question/', (req, res) => {
