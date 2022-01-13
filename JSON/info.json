@@ -1,11 +1,29 @@
 {
   "question_info": {
-    "counter": 0
+    "counter": 4,
+    "genres": [
+      {
+        "id": "gk",
+        "text": "General Knowledge"
+      },
+      {
+        "id": "math",
+        "text": "Math"
+      },
+      {
+        "id": "english",
+        "text": "English"
+      },
+      {
+        "id": "other",
+        "text": "Other"
+      }
+    ]
   },
   "author_info": {
-    "counter": 0
+    "counter": 3
   },
   "ownership_info": {
-    "counter": 0
+    "counter": 4
   }
 }

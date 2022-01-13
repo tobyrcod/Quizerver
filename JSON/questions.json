@@ -1,1 +1,42 @@
-[]
+[
+  {
+    "question_id": 0,
+    "question": "What is a Lamergeier?",
+    "answer": "My chrsitmas present",
+    "genre": "english",
+    "rating": {
+      "likes": 0,
+      "dislikes": 1
+    }
+  },
+  {
+    "question_id": 1,
+    "question": "What is a Lamergeier?",
+    "answer": "My chrsitmas present",
+    "genre": "english",
+    "rating": {
+      "likes": 0,
+      "dislikes": 0
+    }
+  },
+  {
+    "question_id": 2,
+    "question": "",
+    "answer": "",
+    "genre": "gk",
+    "rating": {
+      "likes": 0,
+      "dislikes": 0
+    }
+  },
+  {
+    "question_id": 3,
+    "question": "sdf",
+    "answer": "sdf",
+    "genre": "english",
+    "rating": {
+      "likes": 0,
+      "dislikes": 0
+    }
+  }
+]

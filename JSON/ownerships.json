@@ -1,1 +1,22 @@
-[]
+[
+  {
+    "ownership_id": 0,
+    "question_id": 0,
+    "author_id": 0
+  },
+  {
+    "ownership_id": 1,
+    "question_id": 1,
+    "author_id": 0
+  },
+  {
+    "ownership_id": 2,
+    "question_id": 2,
+    "author_id": 1
+  },
+  {
+    "ownership_id": 3,
+    "question_id": 3,
+    "author_id": 2
+  }
+]

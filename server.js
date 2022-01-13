@@ -13,6 +13,10 @@ const questions = JSON.parse(fs.readFileSync(JSONpath + 'questions.json'));
 const authors = JSON.parse(fs.readFileSync(JSONpath + 'authors.json'));
 const ownerships = JSON.parse(fs.readFileSync(JSONpath + 'ownerships.json'));
 
+app.get('/get-genres', (req, res) => {
+  res.json(info.question_info.genres);
+});
+
 app.get('/get-question-set/', (req, res) => {
   const query = req.query;
   console.log(query);

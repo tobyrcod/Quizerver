@@ -42,11 +42,14 @@ class QuizUI {
     this.btnEndQuiz = divQuiz.querySelector('#btn_end_quiz');
 
     this.frmQuizSetup = divQuiz.querySelector('#setup form');
+    this.selectGenre = this.frmQuizSetup.querySelector('select');
   };
 
   Initialise (quiz) {
-    // UI Responce to Events
+    // Load the Genres
+    this.LoadGenres();
 
+    // UI Responce to Events
     // On Ask Question Event
     document.addEventListener('OnAskQuestionEvent', (e) => {
       const newQuestion = e.detail.question;
@@ -133,10 +136,33 @@ class QuizUI {
         quizUI.txtError.classList.remove('hidden');
       } else {
         quiz.AskNextQuestion();
+        quizUI.frmQuizSetup.reset();
         quizUI.divSetup.classList.add('hidden');
         quizUI.divAsking.classList.remove('hidden');
         quizUI.btnEndQuiz.classList.remove('hidden');
       }
+    });
+  }
+
+  async LoadGenres () {
+    let filterGenres = [];
+    try {
+      const responce = await fetch('/get-genres');
+      if (responce.status !== 200) {
+        throw new Error('Server Unresponsive');
+      } else {
+        const genresText = await responce.text();
+        const genres = JSON.parse(genresText);
+        filterGenres = [{ id: 'all', text: 'All' }].concat(genres);
+      }
+    } catch (e) {
+      // Default values if for some reason we
+      // cannot access the server
+      filterGenres = [{ id: 'all', text: 'All' }];
+    }
+
+    filterGenres.forEach(genre => {
+      this.selectGenre.innerHTML += `<option value="${genre.id}">${genre.text}</option>`;
     });
   }
 
