@@ -13,17 +13,27 @@ const questions = JSON.parse(fs.readFileSync(JSONpath + 'questions.json'));
 const authors = JSON.parse(fs.readFileSync(JSONpath + 'authors.json'));
 const ownerships = JSON.parse(fs.readFileSync(JSONpath + 'ownerships.json'));
 
-app.get('/qs/', (req, res) => {
-  // Deep copy the questions
-  // TODO: make the questionSet some sub set of all questions depending on some criteria
-  let questionSet = [];
-  questions.forEach(element => {
-    questionSet.push(element.question_id);
-  });
+app.get('/get-question-set/', (req, res) => {
+  const query = req.query;
+  console.log(query);
+  function matchQuery (question) {
+    if (query.genre === 'all') return true;
+    return question.genre === query.genre;
+  };
+
+  // TODO: user list.filter and a filter condition
+  let questionSet = [...questions].filter(matchQuery);
+  questionSet = Array.from(questionSet, q => q.question_id);
 
   // Randomise the order of the question set
   // Fisher–Yates shuffle
+  // https://lodash.com/docs/4.17.15#shuffle
   questionSet = _.shuffle(questionSet);
+
+  // Get first n elements of the questionSet,
+  // where n is the number of questions requested
+  // https://lodash.com/docs/4.17.15#slice
+  questionSet = _.slice(questionSet, 0, query.count);
 
   // Return the question set to the user
   res.json(questionSet);
@@ -32,7 +42,6 @@ app.get('/qs/', (req, res) => {
 // TODO: add error trapping to this!
 app.get('/qfqid/:id', (req, res) => {
   const params = req.params;
-  console.log(params);
   const questionId = parseInt(params.id);
   const question = questions.find(question => question.question_id === questionId);
   res.json(question);
@@ -98,7 +107,8 @@ function MakeNewAuthor (authorName) {
 
 // TODO: abstract file management methods to a
 // 'Database' object
-function MakeNewQuestion (question, answer, authorName) {
+// TODO: dont allow questions that are empty to be added
+function MakeNewQuestion (question, answer, genre, authorName) {
   const questionId = info.question_info.counter;
   info.question_info.counter += 1;
 
@@ -106,6 +116,7 @@ function MakeNewQuestion (question, answer, authorName) {
     question_id: questionId,
     question: question,
     answer: answer,
+    genre: genre,
     rating: {
       likes: 0,
       dislikes: 0
@@ -151,7 +162,7 @@ app.post('/add-question/', (req, res) => {
   const query = req.query;
   console.log(query);
 
-  MakeNewQuestion(query.question, query.answer, query.authorName);
+  MakeNewQuestion(query.question, query.answer, query.genre, query.authorName);
 
   // Send a Responce to the POST request
   res.json({

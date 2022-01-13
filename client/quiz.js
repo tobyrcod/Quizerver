@@ -33,10 +33,15 @@ class QuizUI {
     // start / ask / reveal answer into a method
     this.txtTopText = divQuiz.querySelector('#top_text');
     this.txtError = divQuiz.querySelector('#error');
+
+    this.divSetup = divQuiz.querySelector('#setup');
+    this.divAsking = divQuiz.querySelector('#asking');
+
     this.btnAskQuestion = divQuiz.querySelector('#btn_ask_question');
     this.btnRevealAnswer = divQuiz.querySelector('#btn_reveal_answer');
-    this.btnStartQuiz = divQuiz.querySelector('#btn_start_quiz');
     this.btnEndQuiz = divQuiz.querySelector('#btn_end_quiz');
+
+    this.frmQuizSetup = divQuiz.querySelector('#setup form');
   };
 
   Initialise (quiz) {
@@ -92,22 +97,6 @@ class QuizUI {
     document.addEventListener('odcue', (e) => {
       this.back.divRatings.dislikes.text.innerHTML = `- ${e.detail.newDislikesCount}`;
     });
-    // Button that Starts the Quiz
-    this.btnStartQuiz.addEventListener('click', async function (event) {
-      // Get the question set
-      if (quiz.questionSet === null) {
-        const error = await quiz.InitializeQuestionSet();
-        if (error) {
-          // TODO: make this message visible to user
-          quizUI.txtError.innerHTML = error.message;
-          quizUI.txtError.classList.remove('hidden');
-        } else {
-          quiz.AskNextQuestion();
-          quizUI.front.divFront.classList.remove('hidden');
-          quizUI.btnStartQuiz.classList.add('hidden');
-        }
-      }
-    });
     // Button That gets the next question
     this.btnAskQuestion.addEventListener('click', function (event) {
       // Ask the question
@@ -117,6 +106,38 @@ class QuizUI {
     this.btnRevealAnswer.addEventListener('click', (event) => {
       this.RevealAnswer();
     });
+    // Button that ends the quiz
+    this.btnEndQuiz.addEventListener('click', (event) => {
+      this.EndQuiz();
+    });
+    // Button that Starts the Quiz
+    this.frmQuizSetup.addEventListener('submit', async function (event) {
+      // POST method as seen in the Goats Example
+      // https://github.com/stevenaeola/goats/blob/main/client/script.js
+
+      // Stop the form from being submitted
+      event.preventDefault();
+
+      // Get the data from the form
+      const data = new FormData(quizUI.frmQuizSetup);
+      // Get the parameters from the query
+      const params = new URLSearchParams(data);
+
+      console.log(params.toString());
+      // Make the POST request. Get the question set
+      const error = await quiz.InitializeQuestionSet(params);
+      console.log(error);
+      if (error) {
+        // TODO: make this message visible to user
+        quizUI.txtError.innerHTML = error.message;
+        quizUI.txtError.classList.remove('hidden');
+      } else {
+        quiz.AskNextQuestion();
+        quizUI.divSetup.classList.add('hidden');
+        quizUI.divAsking.classList.remove('hidden');
+        quizUI.btnEndQuiz.classList.remove('hidden');
+      }
+    });
   }
 
   RevealAnswer () {
@@ -125,13 +146,20 @@ class QuizUI {
     this.back.divBack.classList.remove('hidden');
     this.btnRevealAnswer.classList.add('hidden');
     // TODO: abstract final question logic inside quiz
-    // If we just revealed the answer for the final question
-    if (quiz.currentQuestionIndex >= quiz.questionSet.length - 1) {
-      this.btnEndQuiz.classList.remove('hidden');
-    } else {
-      // We have more questions to ask
+    // If we have more questions to ask
+    if (quiz.currentQuestionIndex < quiz.questionSet.length - 1) {
       this.btnAskQuestion.classList.remove('hidden');
     }
+  };
+
+  EndQuiz () {
+    quiz.Reset();
+    this.btnEndQuiz.classList.add('hidden');
+    this.btnRevealAnswer.classList.add('hidden');
+    this.btnAskQuestion.classList.add('hidden');
+    this.divAsking.classList.add('hidden');
+    this.divSetup.classList.remove('hidden');
+    this.txtTopText.innerHTML = 'Start the Quiz now!';
   };
 };
 
@@ -143,13 +171,17 @@ class Quiz {
     this.currentQuestion = null;
   }
 
+  Reset () {
+    this.currentQuestionIndex = -1;
+    this.questionSet = null;
+
+    this.currentQuestion = null;
+  }
+
   async AskNextQuestion () {
     // CurrentQuestionIndex refers to the last question we got for certain from the server
-    console.log(`remaining ${this.currentQuestionIndex} / ${this.questionSet.length}`);
-    if (this.currentQuestionIndex >= this.questionSet.length - 1) {
-      // We have reached the end of the question set
-      console.log('end of questiosn0000');
-    } else {
+    // If we have more questions to ask
+    if (this.currentQuestionIndex < this.questionSet.length - 1) {
       // Get the next Question from the server
       const newQuestion = await this.GetQuestionFromQuestionId(this.questionSet[this.currentQuestionIndex + 1]);
 
@@ -202,14 +234,19 @@ class Quiz {
   };
 
   // TODO: Add parameters for only questions that match some conditions
-  async InitializeQuestionSet () {
+  async InitializeQuestionSet (params) {
+    console.log(params);
     try {
-      const responce = await fetch('/qs/');
+      const responce = await fetch('/get-question-set?' + params);
+      if (responce.status === 404) {
+        return new Error('404 Error!');
+      }
       const questionSetText = await responce.text();
       const questionSet = JSON.parse(questionSetText);
       if (questionSet.length <= 0) {
         return new Error('No Questions Avaliable');
       }
+      this.Reset();
       this.questionSet = questionSet;
       return false;
     } catch (e) {

@@ -30,37 +30,68 @@
     to other pages, with the only downside being security, which we dont need to worry about-->
     <div id="quiz">
       <p id="top_text">Start the Quiz now!</p>
-      <div id="front" class="hidden">
-        <p id="question"></p>
-        <p id="author"></p>
+      <p id="error" class="hidden"></p>
+      <div id="setup">
+        <form action="/get-question-set" method="GET">
+          <label for="count">How many questions do you want?: </label>
+          <input type="number" name="count" id="question_count" value="10">
+          <br>
+          <!--TODO: Get the options from the server not hardcoded-->
+          <label for="genre">What type of questions do you want?:</label>
+          <select name="genre" id="genre">
+            <option value="all">All</option>
+            <option value="math">Math</option>
+            <option value="english">English</option>
+            <option value="gk">General Knowledge</option>
+          </select>
+          <br>
+          <br>
+          <button>Submit</button>
+        </form>
       </div>
-      <div id="back" class="hidden">
-        <p id="answer"></p>
-        <div id="ratings">
-          <div id="likes">
-            <p>[likes amount]</p> 
-            <button>upvote</button>
-          </div>
-          <div id="dislikes">
-            <p>[dislikes amount]</p> 
-            <button>downvote</button>
+      <div id="asking" class="hidden">
+        <div id="front">
+          <p id="question"></p>
+          <p id="author"></p>
+        </div>
+        <div id="back" class="hidden">
+          <p id="answer"></p>
+          <div id="ratings">
+            <div id="likes">
+              <p>[likes amount]</p> 
+              <button>upvote</button>
+            </div>
+            <div id="dislikes">
+              <p>[dislikes amount]</p> 
+              <button>downvote</button>
+            </div>
           </div>
         </div>
       </div>
-      <p id="error" class="hidden"></p>
+      <br>
       <button id="btn_ask_question" class="hidden">Next Question</button>
       <button id="btn_reveal_answer" class="hidden">Reveal Answer</button>
       <button id="btn_end_quiz" class="hidden">End Quiz</button>
-      <button id="btn_start_quiz">Start Quiz</button>
     </div>
     <div id="add_question" class="hidden">
       <form action="/add-question" method="POST">
         <label for="question">Question: </label>
         <textarea name="question" id="question"></textarea>
+        <br>
         <label for="answer">Answer: </label>
         <textarea name="answer" id="answer"></textarea>
+        <br>
+        <label for="genre">What type of questions do you want?:</label>
+        <select name="genre" id="genre">
+          <option value="all">All</option>
+          <option value="math">Math</option>
+          <option value="english">English</option>
+          <option value="gk">General Knowledge</option>
+        </select>
+        <br>
         <label for="author">Author name: </label>
         <input type="text" name="authorName" id="authorName">
+        <br>
         <button>Submit</button>
       </form>
     </div>

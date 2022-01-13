@@ -10,6 +10,7 @@ addQuestionForm.addEventListener('submit', async function (event) {
   const data = new FormData(addQuestionForm);
   // Get the parameters from the query
   const params = new URLSearchParams(data);
+  console.log(params);
   // Make the POST request
   try {
     const responce = await fetch('/add-question?' + params, { method: 'POST' });
