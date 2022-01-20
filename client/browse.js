@@ -3,9 +3,9 @@ const frmFilter = dBrowse.querySelector('form');
 const txtMessage = dBrowse.querySelector('#message');
 const tblBody = dBrowse.querySelector('table tbody');
 
-// Add the Genres to the Dropdown Selection
 window.addEventListener('DOMContentLoaded', async function (event) {
-  const selectGenre = frmFilter.querySelector('select');
+  // Add the Genres to the Dropdown Selection
+  const selectGenre = frmFilter.querySelector('select#genre');
   let addGenres = [];
   try {
     const responce = await fetch('/get-genres');
@@ -14,16 +14,36 @@ window.addEventListener('DOMContentLoaded', async function (event) {
     } else {
       const genresText = await responce.text();
       const genres = JSON.parse(genresText);
-      addGenres = genres;
+      addGenres = [{ id: 'all', text: 'All' }].concat(genres);
     }
   } catch (e) {
     // Default values if for some reason we
     // cannot access the server
-    addGenres = [{ id: 'other', text: 'Other' }];
+    addGenres = [{ id: 'all', text: 'All' }];
   }
-
   addGenres.forEach(genre => {
     selectGenre.innerHTML += `<option value="${genre.id}">${genre.text}</option>`;
+  });
+
+  // Add the sort options to the Dropdown Selection
+  const selectSort = frmFilter.querySelector('select#sort');
+  let addSortOrders = [];
+  try {
+    const responce = await fetch('/get-sorts');
+    if (responce.status !== 200) {
+      throw new Error('Server Unresponsive');
+    } else {
+      const sortsText = await responce.text();
+      const sorts = JSON.parse(sortsText);
+      addSortOrders = sorts;
+    }
+  } catch (e) {
+    // Default values if for some reason we
+    // cannot access the server
+    addSortOrders = [{ id: 'alphDesc', text: 'Alphabet Decending' }];
+  }
+  addSortOrders.forEach(sort => {
+    selectSort.innerHTML += `<option value="${sort.id}">${sort.text}</option>`;
   });
 });
 
@@ -47,15 +67,18 @@ frmFilter.addEventListener('submit', async function (event) {
     // Open the table body
     const questionSet = info.questionSet;
     let tblHTML = '';
-    questionSet.forEach(questionInfo => {
+    for (let i = 0; i < questionSet.length; i++) {
+      const questionInfo = questionSet[i];
       let qsHTML = '';
       qsHTML += '<tr>';
-      qsHTML += `<th scope="row">${questionInfo.question_id}</th>`;
+      qsHTML += `<th scope="row">${i}</th>`;
       qsHTML += `<td>${questionInfo.question}</td>`;
       qsHTML += `<td>${questionInfo.answer}</td>`;
+      qsHTML += `<td>${questionInfo.rating.likes} ^</td>`;
+      qsHTML += `<td>${questionInfo.rating.dislikes} v</td>`;
       qsHTML += '</tr>';
       tblHTML += qsHTML;
-    });
+    };
 
     tblBody.innerHTML = tblHTML;
 

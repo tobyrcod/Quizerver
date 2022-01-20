@@ -18,6 +18,10 @@ app.get('/get-genres', (req, res) => {
   res.json(info.question_info.genres);
 });
 
+app.get('/get-sorts', (req, res) => {
+  res.json(info.sorts);
+});
+
 // TODO: add likes information to the responce
 // TODO: add author information to the responce
 app.get('/get-question-info-set/', (req, res) => {
@@ -25,9 +29,33 @@ app.get('/get-question-info-set/', (req, res) => {
   const query = req.query;
   const questionSet = GetQuestionSet(query);
 
+  console.log(query);
+  // Sort the questions
+  if (query.sort === 'alpha') {
+    questionSet.sort((a, b) => {
+      return (a.question > b.question) ? 1 : -1;
+    });
+  } else if (query.sort === 'rating') {
+    questionSet.sort((a, b) => {
+      const comparisonScore = QuestionScore(a) - QuestionScore(b);
+      if (comparisonScore > 0) return 1;
+      if (comparisonScore < 0) return -1;
+      // Comparison Score == 0
+      return (a.rating.likes > b.rating.likes) ? 1 : -1;
+    });
+  }
+
+  if (query.order === 'desc') {
+    questionSet.reverse();
+  }
+
   // Return the question set to the user
   res.json(questionSet);
 });
+
+function QuestionScore(question) {
+  return question.likes - question.dislikes;
+}
 
 app.get('/get-question-id-set/', (req, res) => {
   // Get all the JSON questions that match the query

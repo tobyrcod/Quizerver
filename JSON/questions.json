@@ -1,332 +1,82 @@
 [
   {
     "question_id": 0,
-    "question": "What is a Lamergeier?",
-    "answer": "My chrsitmas present",
-    "genre": "english",
+    "question": "a",
+    "answer": "a",
+    "genre": "gk",
     "rating": {
-      "likes": 2,
-      "dislikes": 1
+      "likes": 5,
+      "dislikes": 3
     }
   },
   {
     "question_id": 1,
-    "question": "What is a Lamergeier?",
-    "answer": "My chrsitmas present",
-    "genre": "english",
+    "question": "c",
+    "answer": "c",
+    "genre": "gk",
     "rating": {
-      "likes": 15,
-      "dislikes": 0
+      "likes": 6,
+      "dislikes": 1
     }
   },
   {
     "question_id": 2,
-    "question": "",
-    "answer": "",
+    "question": "v",
+    "answer": "v",
     "genre": "gk",
-    "rating": {
-      "likes": 0,
-      "dislikes": 0
-    }
-  },
-  {
-    "question_id": 3,
-    "question": "sdf",
-    "answer": "sdf",
-    "genre": "english",
     "rating": {
       "likes": 3,
       "dislikes": 0
     }
   },
   {
-    "question_id": 4,
-    "question": "zdg",
-    "answer": "dfgz",
-    "genre": "math",
+    "question_id": 3,
+    "question": "b",
+    "answer": "b",
+    "genre": "gk",
     "rating": {
-      "likes": 0,
+      "likes": 13,
       "dislikes": 0
+    }
+  },
+  {
+    "question_id": 4,
+    "question": "k",
+    "answer": "k",
+    "genre": "gk",
+    "rating": {
+      "likes": 4,
+      "dislikes": 7
     }
   },
   {
     "question_id": 5,
-    "question": "",
-    "answer": "",
+    "question": "q",
+    "answer": "q",
     "genre": "gk",
     "rating": {
       "likes": 0,
-      "dislikes": 0
+      "dislikes": 2
     }
   },
   {
     "question_id": 6,
-    "question": "",
-    "answer": "",
-    "genre": "english",
+    "question": "z",
+    "answer": "z",
+    "genre": "gk",
     "rating": {
-      "likes": 0,
-      "dislikes": 0
+      "likes": 6,
+      "dislikes": 5
     }
   },
   {
     "question_id": 7,
-    "question": "zsrg",
-    "answer": "",
+    "question": "d",
+    "answer": "d",
     "genre": "gk",
     "rating": {
-      "likes": 0,
-      "dislikes": 0
-    }
-  },
-  {
-    "question_id": 8,
-    "question": "sdf",
-    "answer": "",
-    "genre": "gk",
-    "rating": {
-      "likes": 0,
-      "dislikes": 0
-    }
-  },
-  {
-    "question_id": 9,
-    "question": "",
-    "answer": "",
-    "genre": "gk",
-    "rating": {
-      "likes": 0,
-      "dislikes": 0
-    }
-  },
-  {
-    "question_id": 10,
-    "question": "zdfg",
-    "answer": "",
-    "genre": "gk",
-    "rating": {
-      "likes": 0,
-      "dislikes": 0
-    }
-  },
-  {
-    "question_id": 11,
-    "question": "zdfg",
-    "answer": "zdfg",
-    "genre": "gk",
-    "rating": {
-      "likes": 0,
-      "dislikes": 0
-    }
-  },
-  {
-    "question_id": 12,
-    "question": "zdfg",
-    "answer": "zdfg",
-    "genre": "gk",
-    "rating": {
-      "likes": 0,
-      "dislikes": 0
-    }
-  },
-  {
-    "question_id": 13,
-    "question": "zdfg",
-    "answer": "zdfg",
-    "genre": "gk",
-    "rating": {
-      "likes": 0,
-      "dislikes": 0
-    }
-  },
-  {
-    "question_id": 14,
-    "question": "asd",
-    "answer": "",
-    "genre": "gk",
-    "rating": {
-      "likes": 0,
-      "dislikes": 0
-    }
-  },
-  {
-    "question_id": 15,
-    "question": "asd",
-    "answer": "asd",
-    "genre": "gk",
-    "rating": {
-      "likes": 0,
-      "dislikes": 0
-    }
-  },
-  {
-    "question_id": 16,
-    "question": "asd",
-    "answer": "asd",
-    "genre": "gk",
-    "rating": {
-      "likes": 0,
-      "dislikes": 0
-    }
-  },
-  {
-    "question_id": 17,
-    "question": "asd",
-    "answer": "asd",
-    "genre": "gk",
-    "rating": {
-      "likes": 0,
-      "dislikes": 0
-    }
-  },
-  {
-    "question_id": 18,
-    "question": "asd",
-    "answer": "asd",
-    "genre": "gk",
-    "rating": {
-      "likes": 0,
-      "dislikes": 0
-    }
-  },
-  {
-    "question_id": 19,
-    "question": "",
-    "answer": "",
-    "genre": "gk",
-    "rating": {
-      "likes": 0,
-      "dislikes": 0
-    }
-  },
-  {
-    "question_id": 20,
-    "question": "`se",
-    "answer": "",
-    "genre": "gk",
-    "rating": {
-      "likes": 0,
-      "dislikes": 0
-    }
-  },
-  {
-    "question_id": 21,
-    "question": "`se",
-    "answer": "sdf",
-    "genre": "gk",
-    "rating": {
-      "likes": 0,
-      "dislikes": 0
-    }
-  },
-  {
-    "question_id": 22,
-    "question": "`sdf",
-    "answer": "sdf",
-    "genre": "gk",
-    "rating": {
-      "likes": 0,
-      "dislikes": 0
-    }
-  },
-  {
-    "question_id": 23,
-    "question": "sdf",
-    "answer": "sdf",
-    "genre": "gk",
-    "rating": {
-      "likes": 0,
-      "dislikes": 0
-    }
-  },
-  {
-    "question_id": 24,
-    "question": "sdf",
-    "answer": "",
-    "genre": "gk",
-    "rating": {
-      "likes": 0,
-      "dislikes": 0
-    }
-  },
-  {
-    "question_id": 25,
-    "question": "sdf",
-    "answer": "sa",
-    "genre": "gk",
-    "rating": {
-      "likes": 0,
-      "dislikes": 0
-    }
-  },
-  {
-    "question_id": 26,
-    "question": "",
-    "answer": "",
-    "genre": "gk",
-    "rating": {
-      "likes": 0,
-      "dislikes": 0
-    }
-  },
-  {
-    "question_id": 27,
-    "question": "zrg",
-    "answer": "",
-    "genre": "gk",
-    "rating": {
-      "likes": 0,
-      "dislikes": 0
-    }
-  },
-  {
-    "question_id": 28,
-    "question": "zrg",
-    "answer": "fggggg",
-    "genre": "gk",
-    "rating": {
-      "likes": 0,
-      "dislikes": 0
-    }
-  },
-  {
-    "question_id": 29,
-    "question": "zg",
-    "answer": "zdf",
-    "genre": "gk",
-    "rating": {
-      "likes": 0,
-      "dislikes": 0
-    }
-  },
-  {
-    "question_id": 30,
-    "question": "dfg",
-    "answer": "",
-    "genre": "gk",
-    "rating": {
-      "likes": 0,
-      "dislikes": 0
-    }
-  },
-  {
-    "question_id": 31,
-    "question": "dfg",
-    "answer": "dfg",
-    "genre": "gk",
-    "rating": {
-      "likes": 0,
-      "dislikes": 0
-    }
-  },
-  {
-    "question_id": 32,
-    "question": "",
-    "answer": "",
-    "genre": "gk",
-    "rating": {
-      "likes": 0,
-      "dislikes": 0
+      "likes": 5,
+      "dislikes": 11
     }
   }
 ]

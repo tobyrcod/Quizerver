@@ -100,8 +100,18 @@
       <h1>Take a look at all the Questions</h1>
       <p id="message" class="hidden"></p>
       <form action="/get-question-set" method="GET">
+        <label for="genre">Filter Genre:</label>
         <select name="genre" id="genre"></select>
-        <button>Filter Questions</button>
+        <br>
+        <label for="sort">Sort By:</label>
+        <select name="sort" id="sort"></select>
+        <label for="order">Order By:</label>
+        <select name="order" id="order">
+          <option value="asc">Ascending</option>
+          <option value="desc">Descending</option>
+        </select>
+        <br>
+        <button>See Questions</button>
       </form>
       <!--https://getbootstrap.com/docs/4.0/content/tables/-->
       <table class="table">
@@ -112,6 +122,8 @@
             <th scope="col">#</th>
             <th scope="col">Question</th>
             <th scope="col">Answer</th>
+            <th scope="col">Likes</th>
+            <th scope="col">Dislikes</th>
           </tr>
         </thead>
         <tbody>
