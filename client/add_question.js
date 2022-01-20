@@ -1,4 +1,5 @@
 const frmAddQuestion = document.querySelector('#add_question form');
+const pMessage = document.querySelector('#add_question #message');
 window.addEventListener('DOMContentLoaded', async function (event) {
   // Add the Genres to the Dropdown Selection
   const selectGenre = frmAddQuestion.querySelector('select');
@@ -33,16 +34,22 @@ frmAddQuestion.addEventListener('submit', async function (event) {
   const data = new FormData(frmAddQuestion);
   // Get the parameters from the query
   const params = new URLSearchParams(data);
-  console.log(params);
+
   // Make the POST request
   try {
     const responce = await fetch('/add-question?' + params, { method: 'POST' });
-    const json = await responce.json();
-    if (json.status === 'success') {
+    if (responce.status === 200) {
       frmAddQuestion.reset();
+      pMessage.innerHTML = 'Question Succesfully Added!';
+      pMessage.classList.remove('hidden');
+    } else {
+      const json = await responce.json();
+      pMessage.innerHTML = json.message;
+      pMessage.classList.remove('hidden');
     }
   } catch (e) {
-    // TODO: Add visual indicator upload failed to the user
-    console.log('Could not upload question to the server, please try again later');
+    const error = new Error('Could not reach the server, please try again later');
+    pMessage.innerHTML = error.message;
+    pMessage.classList.remove('hidden');
   }
 });

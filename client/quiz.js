@@ -56,7 +56,7 @@ class QuizUI {
       if (newQuestion != null) {
         // Change the Top Text
         // TODO: replace the quiz methods with actual quiz method things to get thing
-        this.txtTopText.innerHTML = `Question # ${quiz.currentQuestionIndex + 1} / ${quiz.questionSet.length}`;
+        this.txtTopText.innerHTML = `Question # ${quiz.currentQuestionIndex + 1} / ${quiz.questionIDSet.length}`;
 
         // Write the Question to the Page
         this.front.txtQuestion.innerHTML = newQuestion.question;
@@ -127,9 +127,8 @@ class QuizUI {
       const params = new URLSearchParams(data);
 
       console.log(params.toString());
-      // Make the POST request. Get the question set
+      // Make the GET request. Get the question set
       const error = await quiz.InitializeQuestionSet(params);
-      console.log(error);
       if (error) {
         // TODO: make this message visible to user
         quizUI.txtError.innerHTML = error.message;
@@ -173,7 +172,7 @@ class QuizUI {
     this.btnRevealAnswer.classList.add('hidden');
     // TODO: abstract final question logic inside quiz
     // If we have more questions to ask
-    if (quiz.currentQuestionIndex < quiz.questionSet.length - 1) {
+    if (quiz.currentQuestionIndex < quiz.questionIDSet.length - 1) {
       this.btnAskQuestion.classList.remove('hidden');
     }
   };
@@ -192,14 +191,14 @@ class QuizUI {
 class Quiz {
   constructor () {
     this.currentQuestionIndex = -1;
-    this.questionSet = null;
+    this.questionIDSet = null;
 
     this.currentQuestion = null;
   }
 
   Reset () {
     this.currentQuestionIndex = -1;
-    this.questionSet = null;
+    this.questionIDSet = null;
 
     this.currentQuestion = null;
   }
@@ -207,9 +206,9 @@ class Quiz {
   async AskNextQuestion () {
     // CurrentQuestionIndex refers to the last question we got for certain from the server
     // If we have more questions to ask
-    if (this.currentQuestionIndex < this.questionSet.length - 1) {
+    if (this.currentQuestionIndex < this.questionIDSet.length - 1) {
       // Get the next Question from the server
-      const newQuestion = await this.GetQuestionFromQuestionId(this.questionSet[this.currentQuestionIndex + 1]);
+      const newQuestion = await this.GetQuestionFromQuestionId(this.questionIDSet[this.currentQuestionIndex + 1]);
 
       // If the request was valid
       if (newQuestion != null) {
@@ -263,17 +262,17 @@ class Quiz {
   async InitializeQuestionSet (params) {
     console.log(params);
     try {
-      const responce = await fetch('/get-question-set?' + params);
+      const responce = await fetch('/get-question-id-set?' + params);
       if (responce.status === 404) {
         return new Error('404 Error!');
       }
-      const questionSetText = await responce.text();
-      const questionSet = JSON.parse(questionSetText);
-      if (questionSet.length <= 0) {
+      const questionIdSetText = await responce.text();
+      const questionIdSet = JSON.parse(questionIdSetText);
+      if (questionIdSet.length <= 0) {
         return new Error('No Questions Avaliable');
       }
       this.Reset();
-      this.questionSet = questionSet;
+      this.questionIDSet = questionIdSet;
       return false;
     } catch (e) {
       return new Error('Unable to Connect to Server, Please try again');
@@ -284,7 +283,7 @@ class Quiz {
     try {
       // POST Request with Fetch()
       // https://www.youtube.com/watch?v=Kw5tC5nQMRY
-      const data = { question_id: this.questionSet[this.currentQuestionIndex] };
+      const data = { question_id: this.questionIDSet[this.currentQuestionIndex] };
       const options = {
         method: 'POST',
         headers: {
@@ -309,7 +308,7 @@ class Quiz {
     try {
       // POST Request with Fetch()
       // https://www.youtube.com/watch?v=Kw5tC5nQMRY
-      const data = { question_id: this.questionSet[this.currentQuestionIndex] };
+      const data = { question_id: this.questionIDSet[this.currentQuestionIndex] };
       const options = {
         method: 'POST',
         headers: {

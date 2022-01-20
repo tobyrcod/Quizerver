@@ -18,5 +18,150 @@
     "ownership_id": 3,
     "question_id": 3,
     "author_id": 2
+  },
+  {
+    "ownership_id": 4,
+    "question_id": 4,
+    "author_id": 3
+  },
+  {
+    "ownership_id": 5,
+    "question_id": 5,
+    "author_id": 1
+  },
+  {
+    "ownership_id": 6,
+    "question_id": 6,
+    "author_id": 1
+  },
+  {
+    "ownership_id": 7,
+    "question_id": 7,
+    "author_id": 1
+  },
+  {
+    "ownership_id": 8,
+    "question_id": 8,
+    "author_id": 1
+  },
+  {
+    "ownership_id": 9,
+    "question_id": 9,
+    "author_id": 1
+  },
+  {
+    "ownership_id": 10,
+    "question_id": 10,
+    "author_id": 1
+  },
+  {
+    "ownership_id": 11,
+    "question_id": 11,
+    "author_id": 1
+  },
+  {
+    "ownership_id": 12,
+    "question_id": 12,
+    "author_id": 1
+  },
+  {
+    "ownership_id": 13,
+    "question_id": 13,
+    "author_id": 1
+  },
+  {
+    "ownership_id": 14,
+    "question_id": 14,
+    "author_id": 1
+  },
+  {
+    "ownership_id": 15,
+    "question_id": 15,
+    "author_id": 1
+  },
+  {
+    "ownership_id": 16,
+    "question_id": 16,
+    "author_id": 1
+  },
+  {
+    "ownership_id": 17,
+    "question_id": 17,
+    "author_id": 1
+  },
+  {
+    "ownership_id": 18,
+    "question_id": 18,
+    "author_id": 1
+  },
+  {
+    "ownership_id": 19,
+    "question_id": 19,
+    "author_id": 1
+  },
+  {
+    "ownership_id": 20,
+    "question_id": 20,
+    "author_id": 1
+  },
+  {
+    "ownership_id": 21,
+    "question_id": 21,
+    "author_id": 1
+  },
+  {
+    "ownership_id": 22,
+    "question_id": 22,
+    "author_id": 4
+  },
+  {
+    "ownership_id": 23,
+    "question_id": 23,
+    "author_id": 4
+  },
+  {
+    "ownership_id": 24,
+    "question_id": 24,
+    "author_id": 5
+  },
+  {
+    "ownership_id": 25,
+    "question_id": 25,
+    "author_id": 5
+  },
+  {
+    "ownership_id": 26,
+    "question_id": 26,
+    "author_id": 4
+  },
+  {
+    "ownership_id": 27,
+    "question_id": 27,
+    "author_id": 4
+  },
+  {
+    "ownership_id": 28,
+    "question_id": 28,
+    "author_id": 4
+  },
+  {
+    "ownership_id": 29,
+    "question_id": 29,
+    "author_id": 4
+  },
+  {
+    "ownership_id": 30,
+    "question_id": 30,
+    "author_id": 4
+  },
+  {
+    "ownership_id": 31,
+    "question_id": 31,
+    "author_id": 4
+  },
+  {
+    "ownership_id": 32,
+    "question_id": 32,
+    "author_id": 4
   }
 ]

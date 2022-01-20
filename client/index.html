@@ -22,19 +22,25 @@
     <script src="script.js" defer></script>
     <script src="quiz.js" defer></script>
     <script src="add_question.js" defer></script>
+    <script src="browse.js" defer></script>
     <!--Javascript-->
   </head>
   <body>
+    <div id="navbar">
+      <button id="btnQuiz">Play the Quiz</button>
+      <button id="btnAdd">Make a new Question</button>
+      <button id="btnBrowse">Browse all Questions</button>
+    </div>
     <!--TODO?: Stop using my 'hidden' class and just remove the elements
     from the DOM in JS. '?' because this is a lot simpler and allows for quick switching/resuming
     to other pages, with the only downside being security, which we dont need to worry about-->
     <div id="quiz">
-      <p id="top_text">Start the Quiz now!</p>
+      <h1 id="top_text">Start the Quiz now!</h1>
       <p id="error" class="hidden"></p>
       <div id="setup">
         <form action="/get-question-set" method="GET">
           <label for="count">How many questions do you want?: </label>
-          <input type="number" name="count" id="question_count" value="10">
+          <input type="number" name="count" id="question_count" value="10" min="1" max="10">
           <br>
           <!--TODO: Get the options from the server not hardcoded-->
           <label for="genre">What type of questions do you want?:</label>
@@ -42,7 +48,7 @@
           </select>
           <br>
           <br>
-          <button>Submit</button>
+          <button>Start Quiz</button>
         </form>
       </div>
       <div id="asking" class="hidden">
@@ -70,11 +76,14 @@
       <button id="btn_end_quiz" class="hidden">End Quiz</button>
     </div>
     <div id="add_question" class="hidden">
+      <h1>Add a new Question to the Quiz!</h1>
+      <p>*Required Field</p>
+      <p id="message" class="hidden"></p>
       <form action="/add-question" method="POST">
-        <label for="question">Question: </label>
+        <label for="question">Question:*</label>
         <textarea name="question" id="question"></textarea>
         <br>
-        <label for="answer">Answer: </label>
+        <label for="answer">Answer:*</label>
         <textarea name="answer" id="answer"></textarea>
         <br>
         <label for="genre">What type of question is this?:</label>
@@ -87,6 +96,27 @@
         <button>Submit</button>
       </form>
     </div>
-    <button id="switch">Switch to Other Page</button>
+    <div id="browse" class="hidden">
+      <h1>Take a look at all the Questions</h1>
+      <p id="message" class="hidden"></p>
+      <form action="/get-question-set" method="GET">
+        <select name="genre" id="genre"></select>
+        <button>Filter Questions</button>
+      </form>
+      <!--https://getbootstrap.com/docs/4.0/content/tables/-->
+      <table class="table">
+        <thead>
+          <tr>
+            <!--TODO: add likes/dislikes/author-->
+            <!--Add sorting by likes/dislikes/author/alphabet-->
+            <th scope="col">#</th>
+            <th scope="col">Question</th>
+            <th scope="col">Answer</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
   </body>
 </html>

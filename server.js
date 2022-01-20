@@ -7,41 +7,60 @@ app.use(express.static('client'));
 app.use(express.json({ limit: '1mb' }));
 app.use(express.urlencoded({ extended: true }));
 
-const JSONpath = 'JSON/';
-const info = JSON.parse(fs.readFileSync(JSONpath + 'info.json'));
-const questions = JSON.parse(fs.readFileSync(JSONpath + 'questions.json'));
-const authors = JSON.parse(fs.readFileSync(JSONpath + 'authors.json'));
-const ownerships = JSON.parse(fs.readFileSync(JSONpath + 'ownerships.json'));
+// TODO: make the files if they dont exist
+const JSONPath = 'JSON/';
+const info = JSON.parse(fs.readFileSync(JSONPath + 'info.json'));
+const questions = JSON.parse(fs.readFileSync(JSONPath + 'questions.json'));
+const authors = JSON.parse(fs.readFileSync(JSONPath + 'authors.json'));
+const ownerships = JSON.parse(fs.readFileSync(JSONPath + 'ownerships.json'));
 
 app.get('/get-genres', (req, res) => {
   res.json(info.question_info.genres);
 });
 
-app.get('/get-question-set/', (req, res) => {
+// TODO: add likes information to the responce
+// TODO: add author information to the responce
+app.get('/get-question-info-set/', (req, res) => {
+  // Get all the JSON questions that match the query
   const query = req.query;
-  console.log(query);
+  const questionSet = GetQuestionSet(query);
+
+  // Return the question set to the user
+  res.json(questionSet);
+});
+
+app.get('/get-question-id-set/', (req, res) => {
+  // Get all the JSON questions that match the query
+  const query = req.query;
+  const questionSet = GetQuestionSet(query);
+
+  // Get the ids of the questions that match the query
+  let questionIdSet = Array.from(questionSet, q => q.question_id);
+
+  // Randomise the order of the question set
+  // Fisher–Yates shuffle
+  // https://lodash.com/docs/4.17.15#shuffle
+  questionIdSet = _.shuffle(questionIdSet);
+
+  // Get first n elements of the questionSet,
+  // where n is the number of questions requested
+  // https://lodash.com/docs/4.17.15#slice
+  let count = query.count;
+  if (count <= 0) count = 1;
+  questionIdSet = _.slice(questionIdSet, 0, count);
+
+  // Return the question set to the user
+  res.json(questionIdSet);
+});
+
+function GetQuestionSet (query) {
   function matchQuery (question) {
     if (query.genre === 'all') return true;
     return question.genre === query.genre;
   };
 
-  // TODO: user list.filter and a filter condition
-  let questionSet = [...questions].filter(matchQuery);
-  questionSet = Array.from(questionSet, q => q.question_id);
-
-  // Randomise the order of the question set
-  // Fisher–Yates shuffle
-  // https://lodash.com/docs/4.17.15#shuffle
-  questionSet = _.shuffle(questionSet);
-
-  // Get first n elements of the questionSet,
-  // where n is the number of questions requested
-  // https://lodash.com/docs/4.17.15#slice
-  questionSet = _.slice(questionSet, 0, query.count);
-
-  // Return the question set to the user
-  res.json(questionSet);
-});
+  return [...questions].filter(matchQuery);
+}
 
 // TODO: add error trapping to this!
 app.get('/qfqid/:id', (req, res) => {
@@ -65,7 +84,7 @@ app.post('/upvote', (req, res) => {
   const questionId = req.body.question_id;
   const questionIndex = questions.findIndex(question => question.question_id === questionId);
   questions[questionIndex].rating.likes += 1;
-  fs.writeFileSync(JSONpath + 'questions.json', JSON.stringify(questions, null, 2));
+  fs.writeFileSync(JSONPath + 'questions.json', JSON.stringify(questions, null, 2));
 
   // Send a Responce to the POST request
   res.json({
@@ -80,7 +99,7 @@ app.post('/downvote', (req, res) => {
   const questionId = req.body.question_id;
   const questionIndex = questions.findIndex(question => question.question_id === questionId);
   questions[questionIndex].rating.dislikes += 1;
-  fs.writeFileSync(JSONpath + 'questions.json', JSON.stringify(questions, null, 2));
+  fs.writeFileSync(JSONPath + 'questions.json', JSON.stringify(questions, null, 2));
 
   // Send a Responce to the POST request
   res.json({
@@ -103,7 +122,7 @@ function MakeNewAuthor (authorName) {
   };
 
   authors.push(newAuthor);
-  fs.writeFileSync(JSONpath + 'authors.json', JSON.stringify(authors, null, 2));
+  fs.writeFileSync(JSONPath + 'authors.json', JSON.stringify(authors, null, 2));
 
   // Return the index of the new author
   return authors.length - 1;
@@ -142,9 +161,9 @@ function MakeNewQuestion (question, answer, genre, authorName) {
   // Add a new ownership to the database
   MakeNewOwnership(questionId, authorId);
 
-  fs.writeFileSync(JSONpath + 'ownerships.json', JSON.stringify(ownerships, null, 2));
-  fs.writeFileSync(JSONpath + 'questions.json', JSON.stringify(questions, null, 2));
-  fs.writeFileSync(JSONpath + 'info.json', JSON.stringify(info, null, 2));
+  fs.writeFileSync(JSONPath + 'ownerships.json', JSON.stringify(ownerships, null, 2));
+  fs.writeFileSync(JSONPath + 'questions.json', JSON.stringify(questions, null, 2));
+  fs.writeFileSync(JSONPath + 'info.json', JSON.stringify(info, null, 2));
 }
 
 // TODO: abstract file management methods to a
@@ -166,12 +185,31 @@ app.post('/add-question/', (req, res) => {
   const query = req.query;
   console.log(query);
 
-  MakeNewQuestion(query.question, query.answer, query.genre, query.authorName);
+  try {
+    if (query.question === '') {
+      throw new Error('Question cannot be left empty');
+    }
+    if (query.answer === '') {
+      throw new Error('Answer cannot be left empty');
+    }
+  } catch (e) {
+    // Bad Request
+    res.status(400);
+    res.json({
+      message: e.message
+    });
+  }
+
+  let author = query.authorName;
+  if (author === '') {
+    author = 'n/a';
+  }
+
+  MakeNewQuestion(query.question, query.answer, query.genre, author);
 
   // Send a Responce to the POST request
-  res.json({
-    status: 'success'
-  });
+  res.status(200);
+  res.send();
 });
 
 // 404 page
