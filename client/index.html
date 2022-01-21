@@ -22,7 +22,8 @@
     <script src="script.js" defer></script>
     <script src="quiz.js" defer></script>
     <script src="add_question.js" defer></script>
-    <script src="browse.js" defer></script>
+    <script src="browse_questions.js" defer></script>
+    <script src="browse_authors.js" defer></script>
     <!--Javascript-->
   </head>
   <body>
@@ -31,9 +32,6 @@
       <button id="btnAdd">Make a new Question</button>
       <button id="btnBrowse">Browse all Questions</button>
     </div>
-    <!--TODO?: Stop using my 'hidden' class and just remove the elements
-    from the DOM in JS. '?' because this is a lot simpler and allows for quick switching/resuming
-    to other pages, with the only downside being security, which we dont need to worry about-->
     <div id="quiz">
       <h1 id="top_text">Start the Quiz now!</h1>
       <p id="error" class="hidden"></p>
@@ -42,7 +40,6 @@
           <label for="count">How many questions do you want?: </label>
           <input type="number" name="count" id="question_count" value="10" min="1" max="10">
           <br>
-          <!--TODO: Get the options from the server not hardcoded-->
           <label for="genre">What type of questions do you want?:</label>
           <select name="genre" id="genre"> 
           </select>
@@ -107,8 +104,8 @@
         <select name="sort" id="sort"></select>
         <label for="order">Order By:</label>
         <select name="order" id="order">
-          <option value="asc">Ascending</option>
           <option value="desc">Descending</option>
+          <option value="asc">Ascending</option>
         </select>
         <br>
         <button>See Questions</button>
@@ -117,8 +114,7 @@
       <table class="table">
         <thead>
           <tr>
-            <!--TODO: add likes/dislikes/author-->
-            <!--Add sorting by likes/dislikes/author/alphabet-->
+            <!--TODO: add author-->
             <th scope="col">#</th>
             <th scope="col">Question</th>
             <th scope="col">Answer</th>

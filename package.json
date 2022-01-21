@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "pretest": "npx eslint *.js",
-    "fix": "npx eslint --fix *.js",
+    "pretest": "npx eslint server.js",
     "start": "npx nodemon server.js;",
     "precommit": "npm pretest",
     "prepush": "npm pretest"
