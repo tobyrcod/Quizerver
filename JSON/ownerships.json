@@ -228,5 +228,10 @@
     "ownership_id": 45,
     "question_id": 45,
     "author_id": 12
+  },
+  {
+    "ownership_id": 46,
+    "question_id": 46,
+    "author_id": 13
   }
 ]

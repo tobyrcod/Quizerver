@@ -38,12 +38,23 @@ app.get('/get-authors', (req, res) => {
 
 // Gets the possible sorting methods
 // Returns status: 200 or 404
-app.get('/get-sorts', (req, res) => {
-  if (info.sorts === undefined) {
+app.get('/get-question-sorts', (req, res) => {
+  if (info.question_info.sorts === undefined) {
     res.status(404).send();
   } else {
     res.header('Content-Type', 'application/json');
-    res.status(200).json(info.sorts);
+    res.status(200).json(info.question_info.sorts);
+  }
+});
+
+// Gets the possible sorting methods
+// Returns status: 200 or 404
+app.get('/get-author-sorts', (req, res) => {
+  if (info.author_info.sorts === undefined) {
+    res.status(404).send();
+  } else {
+    res.header('Content-Type', 'application/json');
+    res.status(200).json(info.author_info.sorts);
   }
 });
 
@@ -53,12 +64,16 @@ app.get('/get-sorts', (req, res) => {
 app.get('/get-question-info-set/', (req, res) => {
   // Get the data from the request via the query
   const query = req.query;
-  console.log(query);
   // See if the request is valid
   try {
     // Test to make sure the query has an author
     if (query.authorId === undefined || query.authorId === '') {
       throw new Error('Author name cannot be empty');
+    }
+
+    // Test to make sure the querys authorId is valid
+    if (query.authorId !== 'all' && isNaN(query.authorId)) {
+      throw new Error('AuthorId must be a number or "all"');
     }
 
     // Test to make sure the query has a question genre
@@ -117,7 +132,7 @@ app.get('/get-question-info-set/', (req, res) => {
       let authorName = '';
       try {
         // Try to get the author from the questionId
-        const author = GetAuthorFromId(questionSet[i].question_id);
+        const author = GetAuthorFromQuestionId(questionSet[i].question_id);
         // We have found the author of this question
         authorName = author.name;
       } catch (e) {
@@ -136,6 +151,125 @@ app.get('/get-question-info-set/', (req, res) => {
   } catch (e) {
     // The query isn't valid to make a new question
 
+    // We have a Bad Request
+    // return the appropriate status error code and message
+    res.header('Content-Type', 'application/json');
+    res.status(400).json({
+      message: e.message
+    });
+  }
+});
+
+// Gets a list of information about all authors which match
+// a given search query
+// Returns status: 200 or 400
+app.get('/get-author-info-set/', (req, res) => {
+  // Get the data from the request via the query
+  const query = req.query;
+  // See if the request is valid
+  try {
+    console.log(query);
+    // Test to make sure the query has an author
+    if (query.authorId === undefined || query.authorId === '') {
+      throw new Error('AuthorId cannot be empty');
+    }
+
+    // Test to make sure the querys authorId is valid
+    if (query.authorId !== 'all' && isNaN(query.authorId)) {
+      throw new Error('AuthorId must be a number or "all"');
+    }
+
+    // Test to make sure the query has a sort method
+    if (query.sort === undefined || query.sort === '') {
+      throw new Error('Sort Method cannot be empty');
+    }
+
+    // Test to make sure the query has an order method
+    if (query.order === undefined || query.order === '') {
+      throw new Error('Order Method cannot be empty');
+    }
+
+    // The query is valid
+
+    // Get all the JSON authors that match the query
+    const authorsSet = GetAuthorSet(query);
+    // Perform the needed calculations on the authors
+    // to work out the desired information so we can sort them
+    const authorsInfoSet = [];
+    for (let i = 0; i < authorsSet.length; i++) {
+      const author = authorsSet[i];
+      const authorInfo = author;
+      // Get all the questions asked by the author
+      const query = { genre: 'all', authorId: author.author_id };
+      const questionsByAuthor = GetQuestionSet(query);
+      // Calculate how many question this author has written
+      authorInfo.question_count = questionsByAuthor.length;
+      // Calculate the favourite genre of the author
+      // The favourite genre of the author is the genre which most of
+      // their questions have been asked in
+      const authorGenreCounts = {};
+      questionsByAuthor.forEach(question => {
+        if (authorGenreCounts[question.genre] === undefined) {
+          authorGenreCounts[question.genre] = 1;
+        } else {
+          authorGenreCounts[question.genre] += 1;
+        }
+      });
+      let bestKey = { key: 'none', value: -Infinity };
+      for (const key in authorGenreCounts) {
+        if (authorGenreCounts[key] > bestKey.value) {
+          bestKey = { key: key, value: authorGenreCounts[key] };
+        }
+      }
+      if (bestKey.key === 'none') {
+        authorInfo.favourite_genre = '';
+      } else {
+        const bestGenre = info.question_info.genres.find(genre => bestKey.key === genre.id);
+        authorInfo.favourite_genre = bestGenre.text;
+      }
+      // Calculate the Ranking of each Author
+      // The ranking of each author is the sum
+      // of the score of each question that the author has made
+      let authorScore = 0;
+      questionsByAuthor.forEach(question => {
+        authorScore += QuestionScore(question);
+      });
+      authorInfo.author_score = authorScore;
+      // Save this new author Information
+      authorsInfoSet.push(authorInfo);
+    };
+
+    // Sort the questions
+    if (query.sort === 'alpha') {
+      // Sort by alphabetical order
+      authorsInfoSet.sort((a, b) => {
+        return (a.name.toUpperCase() > b.name.toUpperCase()) ? 1 : -1;
+      });
+    } else if (query.sort === 'rating') {
+      // Sort the authors by score
+      authorsInfoSet.sort((a, b) => {
+        return (a.author_score > b.author_score) ? 1 : -1;
+      });
+    } else if (query.sort === 'count') {
+      // Sort the authors by how many questions they have made
+      authorsInfoSet.sort((a, b) => {
+        return (a.question_count > b.question_count) ? 1 : -1;
+      });
+    }
+
+    // Order the questions
+    // By default, they are in ascending order, so only
+    // need to check for desc as these are the only two options
+    if (query.order === 'desc') {
+      authorsInfoSet.reverse();
+    }
+
+    // Return the question set to the user
+    res.header('Content-Type', 'application/json');
+    res.status(200).json(authorsInfoSet);
+  } catch (e) {
+    // The query isn't valid to make a new question
+    console.log(e.message);
     // We have a Bad Request
     // return the appropriate status error code and message
     res.header('Content-Type', 'application/json');
@@ -222,20 +356,11 @@ app.get('/qfqid/:id', (req, res) => {
     // We know the Id is a number
     // Get the Id in integer forms
     const questionId = parseInt(params.id);
-    // Try to find the question with this Id
-    const question = questions.find(question => question.question_id === questionId);
-    // If no question with this Id was found
-    if (question === undefined) {
-      // There is no question with this Id
-      // Throw an appropriate error
-      throw new Error('No question found with this Id');
-    } else {
-      // We found the question with this Id
+    const question = GetQuestionFromQuestionId(questionId);
 
-      // return the question in JSON form
-      res.header('Content-Type', 'application/json');
-      res.status(200).json(question);
-    }
+    // return the question in JSON form
+    res.header('Content-Type', 'application/json');
+    res.status(200).json(question);
   } catch (e) {
     // Request is invalid or
     // We cannot find a question with this id
@@ -264,7 +389,7 @@ app.get('/afqid/:id', (req, res) => {
     // Get the Id in integer form
     const questionId = parseInt(params.id);
     // Get the author from the questionId
-    const author = GetAuthorFromId(questionId);
+    const author = GetAuthorFromQuestionId(questionId);
 
     // We found the author of the question Id provided
 
@@ -393,6 +518,11 @@ app.post('/add-question/', (req, res) => {
       // throw a new error with appropriate error message
       throw new Error('Answer cannot be left empty');
     }
+    // If there is no genre
+    if (query.genre === undefined || query.genre === '') {
+      // throw a new error with appropriate error message
+      throw new Error('Genre cannot be left empty');
+    }
 
     // As author isn't required so if it wasnt specified
     // give a default value of 'unknown'
@@ -425,7 +555,20 @@ app.use((req, res) => {
 // listen to requests
 app.listen(3000);
 
-function GetAuthorFromId (questionId) {
+function GetQuestionFromQuestionId (questionId) {
+  // Try to find the question with this Id
+  const question = questions.find(question => question.question_id === questionId);
+  // If no question with this Id was found
+  if (question === undefined) {
+    // There is no question with this Id
+    // Throw an appropriate error
+    throw new Error('No question found with this Id');
+  }
+
+  return question;
+}
+
+function GetAuthorFromQuestionId (questionId) {
   // Get the ownership information of this questionId
   const ownership = ownerships.find(owner => owner.question_id === questionId);
   // If there is no question with this Id
@@ -446,6 +589,12 @@ function GetAuthorFromId (questionId) {
 
   // Get the AuthorId in integer form
   const authorId = parseInt(ownership.author_id);
+  const author = GetAuthorFromAuthorId(authorId);
+
+  return author;
+}
+
+function GetAuthorFromAuthorId (authorId) {
   // Get the author with this author Id
   const author = authors.find(author => author.author_id === authorId);
   // If no author exists with this Id
@@ -534,17 +683,32 @@ function GetQuestionSet (query) {
     if (query.authorId === 'all') return true;
     // Get the author from the questionId
     try {
-      const author = GetAuthorFromId(question.question_id);
+      const author = GetAuthorFromQuestionId(question.question_id);
       const queryAuthorId = parseInt(query.authorId);
       return author.author_id === queryAuthorId;
     } catch (e) {
-      console.log('error');
       return false;
     }
   }
 
   const matchGenre = [...questions].filter(matchGenreCheck);
   return matchGenre.filter(matchAuthorCheck);
+}
+
+function GetAuthorSet (query) {
+  try {
+    // If we want every author, return all of them
+    if (query.authorId === 'all') return authors;
+
+    // We want a specific author
+
+    // Get the author Id we want as an integer
+    const queryAuthorId = parseInt(query.authorId);
+    const author = GetAuthorFromAuthorId(queryAuthorId);
+    return [author];
+  } catch (e) {
+    return [];
+  }
 }
 
 function QuestionScore (question) {

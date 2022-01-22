@@ -1,6 +1,6 @@
 {
   "question_info": {
-    "counter": 46,
+    "counter": 47,
     "genres": [
       {
         "id": "gk",
@@ -18,22 +18,36 @@
         "id": "other",
         "text": "Other"
       }
+    ],
+    "sorts": [
+      {
+        "id": "rating",
+        "text": "Rating"
+      },
+      {
+        "id": "alpha",
+        "text": "Alphabetical"
+      }
     ]
   },
   "author_info": {
-    "counter": 13
+    "counter": 14,
+    "sorts": [
+      {
+        "id": "count",
+        "text": "Number of Questions"
+      },
+      {
+        "id": "alpha",
+        "text": "Alphabetical"
+      },
+      {
+        "id": "rating",
+        "text": "Total Rating"
+      }
+    ]
   },
   "ownership_info": {
-    "counter": 46
-  },
-  "sorts": [
-    {
-      "id": "rating",
-      "text": "Rating"
-    },
-    {
-      "id": "alpha",
-      "text": "Alphabetical"
-    }
-  ]
+    "counter": 47
+  }
 }

@@ -136,8 +136,8 @@
       </div>
       <div id="browse_authors" class="hidden">
         <form action="/get-author-set" method="GET">
-          <label for="genre">Filter Genre:</label>
-          <select name="genre" id="genre"></select>
+          <label for="genre">Filter Author:</label>
+          <select name="authorId" id="authorName"></select>
           <br>
           <label for="sort">Sort By:</label>
           <select name="sort" id="sort"></select>
@@ -157,6 +157,7 @@
               <th scope="col">Name</th>
               <th scope="col"># of Questions</th>
               <th scope="col">Favourite Genre</th>
+              <th scope="col">Author Score</th>
             </tr>
           </thead>
           <tbody>
