@@ -9,6 +9,11 @@ class Browse {
     this.form = divBrowse.querySelector('form');
     this.tableBody = divBrowse.querySelector('table tbody');
   }
+
+  Reset () {
+    this.form.reset();
+    this.tableBody.innerHTML = '';
+  }
 }
 class BrowseQuestions extends Browse {
   constructor (divBrowse) {
@@ -219,6 +224,17 @@ const browseQuestions = new BrowseQuestions(divBrowseQuestions);
 
 const divBrowseAuthors = dBrowse.querySelector('#browse_authors');
 const browseAuthors = new BrowseAuthors(divBrowseAuthors);
+
+const btnQuestions = dBrowse.querySelector('button#question');
+const btnAuthors = dBrowse.querySelector('button#author');
+const btnReset = dBrowse.querySelector('button#reset');
+btnReset.addEventListener('click', (event) => {
+  browseQuestions.Reset();
+  browseAuthors.Reset();
+    // Handle the Message Box
+    txtMessage.innerHTML = '';
+    txtMessage.classList.add('hidden');
+});
 
 // On DOM (page) loaded
 window.addEventListener('DOMContentLoaded', async function (event) {
