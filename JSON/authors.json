@@ -1,58 +1,125 @@
 [
   {
     "author_id": 0,
-    "name": "a"
+    "name": "a",
+    "question_count": 1,
+    "favourite_genre": "General Knowledge",
+    "author_score": 45
   },
   {
     "author_id": 1,
-    "name": "c"
+    "name": "c",
+    "question_count": 1,
+    "favourite_genre": "General Knowledge",
+    "author_score": 6
   },
   {
     "author_id": 2,
-    "name": "v"
+    "name": "v",
+    "question_count": 1,
+    "favourite_genre": "General Knowledge",
+    "author_score": 7
   },
   {
     "author_id": 3,
-    "name": "b"
+    "name": "b",
+    "question_count": 1,
+    "favourite_genre": "General Knowledge",
+    "author_score": 13
   },
   {
     "author_id": 4,
-    "name": "k"
+    "name": "k",
+    "question_count": 1,
+    "favourite_genre": "General Knowledge",
+    "author_score": -2
   },
   {
     "author_id": 5,
-    "name": "q"
+    "name": "q",
+    "question_count": 1,
+    "favourite_genre": "General Knowledge",
+    "author_score": -11
   },
   {
     "author_id": 6,
-    "name": "z"
+    "name": "z",
+    "question_count": 1,
+    "favourite_genre": "General Knowledge",
+    "author_score": 2
   },
   {
     "author_id": 7,
-    "name": "d"
+    "name": "d",
+    "question_count": 1,
+    "favourite_genre": "General Knowledge",
+    "author_score": 2
   },
   {
     "author_id": 8,
-    "name": "n/a"
+    "name": "n/a",
+    "question_count": 34,
+    "favourite_genre": "General Knowledge",
+    "author_score": 26
   },
   {
     "author_id": 9,
-    "name": "fg"
+    "name": "fg",
+    "question_count": 1,
+    "favourite_genre": "English",
+    "author_score": -2
   },
   {
     "author_id": 10,
-    "name": "444"
+    "name": "444",
+    "question_count": 1,
+    "favourite_genre": "General Knowledge",
+    "author_score": 0
   },
   {
     "author_id": 11,
-    "name": "g`sdg`sdg"
+    "name": "g`sdg`sdg",
+    "question_count": 1,
+    "favourite_genre": "General Knowledge",
+    "author_score": 3
   },
   {
     "author_id": 12,
-    "name": "steven"
+    "name": "steven",
+    "question_count": 1,
+    "favourite_genre": "Other",
+    "author_score": 0
   },
   {
     "author_id": 13,
-    "name": "sleep deprivation"
+    "name": "sleep deprivation",
+    "question_count": 1,
+    "favourite_genre": "Other",
+    "author_score": 8
+  },
+  {
+    "author_id": 14,
+    "name": "unknown",
+    "question_count": 3,
+    "favourite_genre": "General Knowledge",
+    "author_score": 0
+  },
+  {
+    "author_id": 15,
+    "name": "ert",
+    "question_count": 1,
+    "favourite_genre": "English",
+    "author_score": 0
+  },
+  {
+    "author_id": 16,
+    "name": "tobebbebebe",
+    "question_count": 1,
+    "favourite_genre": "General Knowledge",
+    "author_score": 0
+  },
+  {
+    "author_id": 17,
+    "name": "jest"
   }
 ]

@@ -15,7 +15,6 @@ window.addEventListener('DOMContentLoaded', async function (event) {
       // The genres data was avalibale and returned as JSON
       const genresText = await responce.text();
       const genres = JSON.parse(genresText);
-
       // Save the genres we got so we can apply them to the
       // drop down menu
       addGenres = genres;

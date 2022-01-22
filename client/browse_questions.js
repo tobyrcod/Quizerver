@@ -183,6 +183,7 @@ class BrowseQuestions extends Browse {
     // Try to get all the questions that match this query
     try {
       // Get the set of question infos based on the parameters
+      console.log(params.toString());
       const responce = await fetch('/get-question-info-set?' + params);
       // If we succesfully retrieved a question set
       if (responce.status === 200) {

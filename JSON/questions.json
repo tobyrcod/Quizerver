@@ -5,8 +5,8 @@
     "answer": "a",
     "genre": "gk",
     "rating": {
-      "likes": 8,
-      "dislikes": 8
+      "likes": 137,
+      "dislikes": 92
     },
     "authorName": "a"
   },
@@ -61,7 +61,7 @@
     "genre": "gk",
     "rating": {
       "likes": 12,
-      "dislikes": 14
+      "dislikes": 23
     },
     "authorName": "q"
   },
@@ -515,5 +515,278 @@
       "dislikes": 0
     },
     "authorName": "sleep deprivation"
+  },
+  {
+    "question_id": 47,
+    "question": "ert",
+    "answer": "ert",
+    "genre": "gk",
+    "rating": {
+      "likes": 0,
+      "dislikes": 0
+    },
+    "authorName": "unknown"
+  },
+  {
+    "question_id": 48,
+    "question": "tt",
+    "answer": "tt",
+    "genre": "gk",
+    "rating": {
+      "likes": 0,
+      "dislikes": 0
+    },
+    "authorName": "unknown"
+  },
+  {
+    "question_id": 49,
+    "question": "ttt",
+    "answer": "rrr",
+    "genre": "gk",
+    "rating": {
+      "likes": 0,
+      "dislikes": 0
+    },
+    "authorName": "unknown"
+  },
+  {
+    "question_id": 50,
+    "question": "ttt",
+    "answer": "rt",
+    "genre": "english",
+    "rating": {
+      "likes": 0,
+      "dislikes": 0
+    },
+    "authorName": "ert"
+  },
+  {
+    "question_id": 51,
+    "question": "sdf",
+    "answer": "sdf",
+    "genre": "gk",
+    "rating": {
+      "likes": 0,
+      "dislikes": 0
+    },
+    "authorName": "tobebbebebe"
+  },
+  {
+    "question_id": 52,
+    "question": "What is 8   975?",
+    "answer": "983",
+    "genre": "math",
+    "rating": {
+      "likes": 0,
+      "dislikes": 0
+    },
+    "authorName": "jest"
+  },
+  {
+    "question_id": 53,
+    "question": "What is 442 plus 692?",
+    "answer": "1134",
+    "genre": "math",
+    "rating": {
+      "likes": 0,
+      "dislikes": 0
+    },
+    "authorName": "jest"
+  },
+  {
+    "question_id": 54,
+    "question": "What is 869   187?",
+    "answer": "1056",
+    "genre": "math",
+    "rating": {
+      "likes": 0,
+      "dislikes": 0
+    },
+    "authorName": "jest"
+  },
+  {
+    "question_id": 55,
+    "question": "What is 98 plus 639?",
+    "answer": "737",
+    "genre": "math",
+    "rating": {
+      "likes": 0,
+      "dislikes": 0
+    },
+    "authorName": "jest"
+  },
+  {
+    "question_id": 56,
+    "question": "What is 786 plus 374?",
+    "answer": "1160",
+    "genre": "math",
+    "rating": {
+      "likes": 0,
+      "dislikes": 0
+    },
+    "authorName": "jest"
+  },
+  {
+    "question_id": 57,
+    "question": "What is 434 plus 0?",
+    "answer": "434",
+    "genre": "math",
+    "rating": {
+      "likes": 0,
+      "dislikes": 0
+    },
+    "authorName": "jest"
+  },
+  {
+    "question_id": 58,
+    "question": "What is 439 plus 432?",
+    "answer": "871",
+    "genre": "math",
+    "rating": {
+      "likes": 0,
+      "dislikes": 0
+    },
+    "authorName": "jest"
+  },
+  {
+    "question_id": 59,
+    "question": "What is 307 plus 334?",
+    "answer": "641",
+    "genre": "math",
+    "rating": {
+      "likes": 0,
+      "dislikes": 0
+    },
+    "authorName": "jest"
+  },
+  {
+    "question_id": 60,
+    "question": "What is 527 plus 460?",
+    "answer": "987",
+    "genre": "math",
+    "rating": {
+      "likes": 0,
+      "dislikes": 0
+    },
+    "authorName": "jest"
+  },
+  {
+    "question_id": 61,
+    "question": "What is 247 plus 975?",
+    "answer": "1222",
+    "genre": "math",
+    "rating": {
+      "likes": 0,
+      "dislikes": 0
+    },
+    "authorName": "jest"
+  },
+  {
+    "question_id": 62,
+    "question": "What is 761 plus 130?",
+    "answer": "891",
+    "genre": "math",
+    "rating": {
+      "likes": 0,
+      "dislikes": 0
+    },
+    "authorName": "jest"
+  },
+  {
+    "question_id": 63,
+    "question": "What is 579 plus 549?",
+    "answer": "1128",
+    "genre": "math",
+    "rating": {
+      "likes": 0,
+      "dislikes": 0
+    },
+    "authorName": "jest"
+  },
+  {
+    "question_id": 64,
+    "question": "What is 420 plus 633?",
+    "answer": "1053",
+    "genre": "math",
+    "rating": {
+      "likes": 0,
+      "dislikes": 0
+    },
+    "authorName": "jest"
+  },
+  {
+    "question_id": 65,
+    "question": "What is 601 plus 948?",
+    "answer": "1549",
+    "genre": "math",
+    "rating": {
+      "likes": 0,
+      "dislikes": 0
+    },
+    "authorName": "unknown"
+  },
+  {
+    "question_id": 66,
+    "question": "What is 177 plus 968?",
+    "answer": "1145",
+    "genre": "math",
+    "rating": {
+      "likes": 0,
+      "dislikes": 0
+    },
+    "authorName": "jest"
+  },
+  {
+    "question_id": 67,
+    "question": "What is 284 plus 324?",
+    "answer": "608",
+    "genre": "math",
+    "rating": {
+      "likes": 0,
+      "dislikes": 0
+    },
+    "authorName": "unknown"
+  },
+  {
+    "question_id": 68,
+    "question": "What is 207 plus 281?",
+    "answer": "488",
+    "genre": "math",
+    "rating": {
+      "likes": 0,
+      "dislikes": 0
+    },
+    "authorName": "jest"
+  },
+  {
+    "question_id": 69,
+    "question": "What is 228 plus 77?",
+    "answer": "305",
+    "genre": "math",
+    "rating": {
+      "likes": 0,
+      "dislikes": 0
+    },
+    "authorName": "unknown"
+  },
+  {
+    "question_id": 70,
+    "question": "What is 973 plus 248?",
+    "answer": "1221",
+    "genre": "math",
+    "rating": {
+      "likes": 0,
+      "dislikes": 0
+    }
+  },
+  {
+    "question_id": 71,
+    "question": "What is 461 plus 311?",
+    "answer": "772",
+    "genre": "math",
+    "rating": {
+      "likes": 0,
+      "dislikes": 0
+    }
   }
 ]
