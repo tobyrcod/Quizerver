@@ -17,7 +17,7 @@ const ownerships = JSON.parse(fs.readFileSync(JSONPath + 'ownerships.json'));
 // Gets the possible question genres
 // Returns status: 200 or 404
 app.get('/get-genres', (req, res) => {
-  if (info.question_info.genres === null) {
+  if (info.question_info.genres === undefined) {
     res.status(404).send();
   } else {
     res.header('Content-Type', 'application/json');
@@ -25,10 +25,21 @@ app.get('/get-genres', (req, res) => {
   }
 });
 
+// Gets the authors
+// Returns status: 200 or 404
+app.get('/get-authors', (req, res) => {
+  if (authors === undefined) {
+    res.status(404).send();
+  } else {
+    res.header('Content-Type', 'application/json');
+    res.status(200).json(authors);
+  }
+});
+
 // Gets the possible sorting methods
 // Returns status: 200 or 404
 app.get('/get-sorts', (req, res) => {
-  if (info.sorts === null) {
+  if (info.sorts === undefined) {
     res.status(404).send();
   } else {
     res.header('Content-Type', 'application/json');
@@ -42,21 +53,26 @@ app.get('/get-sorts', (req, res) => {
 app.get('/get-question-info-set/', (req, res) => {
   // Get the data from the request via the query
   const query = req.query;
-
+  console.log(query);
   // See if the request is valid
   try {
+    // Test to make sure the query has an author
+    if (query.authorId === undefined || query.authorId === '') {
+      throw new Error('Author name cannot be empty');
+    }
+
     // Test to make sure the query has a question genre
-    if (query.genre === null || query.genre === '') {
+    if (query.genre === undefined || query.genre === '') {
       throw new Error('Genre cannot be empty');
     }
 
     // Test to make sure the query has a sort method
-    if (query.sort === null || query.sort === '') {
+    if (query.sort === undefined || query.sort === '') {
       throw new Error('Sort Method cannot be empty');
     }
 
     // Test to make sure the query has an order method
-    if (query.order === null || query.order === '') {
+    if (query.order === undefined || query.order === '') {
       throw new Error('Order Method cannot be empty');
     }
 
@@ -94,6 +110,26 @@ app.get('/get-question-info-set/', (req, res) => {
       questionSet.reverse();
     }
 
+    // Add the author of each question to the question info set
+
+    // For every question
+    for (let i = 0; i < questionSet.length; i++) {
+      let authorName = '';
+      try {
+        // Try to get the author from the questionId
+        const author = GetAuthorFromId(questionSet[i].question_id);
+        // We have found the author of this question
+        authorName = author.name;
+      } catch (e) {
+        // We coudn't find the author of the question
+        // So just set the author to be empty
+        authorName = '';
+      }
+
+      // Add this author to the questionInfoSet returned
+      questionSet[i].authorName = authorName;
+    }
+
     // Return the question set to the user
     res.header('Content-Type', 'application/json');
     res.status(200).json(questionSet);
@@ -119,12 +155,12 @@ app.get('/get-question-id-set/', (req, res) => {
   // See if the request is valid
   try {
     // Test to make sure the query has a question genre
-    if (query.genre === null || query.genre === '') {
+    if (query.genre === undefined || query.genre === '') {
       throw new Error('Genre cannot be empty');
     }
 
     // Test to make sure the query has a number of questions
-    if (query.count === null || query.count === '') {
+    if (query.count === undefined || query.count === '') {
       throw new Error('Count cannot be empty');
     }
 
@@ -135,6 +171,10 @@ app.get('/get-question-id-set/', (req, res) => {
 
     // Request is valid
 
+    // If no author is specified, search for all of them
+    if (query.authorId === undefined || query.authorId === '') {
+      query.authorId = 'all';
+    }
     // Get the set of questions that match the query
     const questionSet = GetQuestionSet(query);
 
@@ -223,33 +263,8 @@ app.get('/afqid/:id', (req, res) => {
 
     // Get the Id in integer form
     const questionId = parseInt(params.id);
-    // Get the ownership information of this questionId
-    const ownership = ownerships.find(owner => owner.question_id === questionId);
-    // If there is no question with this Id
-    if (ownership === undefined) {
-      // throw an appropriate error
-      throw new Error('No question found with this Id');
-    }
-
-    // We know there is a question and an ownership of that question
-
-    // If the author Id of the ownership is not a number (should be impossible)
-    if (isNaN(ownership.author_id)) {
-      // throw an appropriate error
-      throw new Error('Author Id of Ownership must be a number');
-    }
-
-    // We know the Author Id is a number
-
-    // Get the AuthorId in integer form
-    const authorId = parseInt(ownership.author_id);
-    // Get the author with this author Id
-    const author = authors.find(author => author.author_id === authorId);
-    // If no author exists with this Id
-    if (author === undefined) {
-      // throw an appropriate error
-      throw new Error('No Author found with this Id');
-    }
+    // Get the author from the questionId
+    const author = GetAuthorFromId(questionId);
 
     // We found the author of the question Id provided
 
@@ -369,12 +384,12 @@ app.post('/add-question/', (req, res) => {
   // Test if the question is valid
   try {
     // If there is no question
-    if (query.question === null || query.question === '') {
+    if (query.question === undefined || query.question === '') {
       // throw a new error with appropriate error message
       throw new Error('Question cannot be left empty');
     }
     // If there is no answer
-    if (query.answer === null || query.answer === '') {
+    if (query.answer === undefined || query.answer === '') {
       // throw a new error with appropriate error message
       throw new Error('Answer cannot be left empty');
     }
@@ -382,7 +397,7 @@ app.post('/add-question/', (req, res) => {
     // As author isn't required so if it wasnt specified
     // give a default value of 'unknown'
     let author = query.authorName;
-    if (author === null || author === '') {
+    if (author === undefined || author === '') {
       author = 'unknown';
     }
 
@@ -409,6 +424,38 @@ app.use((req, res) => {
 
 // listen to requests
 app.listen(3000);
+
+function GetAuthorFromId (questionId) {
+  // Get the ownership information of this questionId
+  const ownership = ownerships.find(owner => owner.question_id === questionId);
+  // If there is no question with this Id
+  if (ownership === undefined) {
+    // throw an appropriate error
+    throw new Error('No question found with this Id');
+  }
+
+  // We know there is a question and an ownership of that question
+
+  // If the author Id of the ownership is not a number (should be impossible)
+  if (isNaN(ownership.author_id)) {
+    // throw an appropriate error
+    throw new Error('Author Id of Ownership must be a number');
+  }
+
+  // We know the Author Id is a number
+
+  // Get the AuthorId in integer form
+  const authorId = parseInt(ownership.author_id);
+  // Get the author with this author Id
+  const author = authors.find(author => author.author_id === authorId);
+  // If no author exists with this Id
+  if (author === undefined) {
+    // throw an appropriate error
+    throw new Error('No Author found with this Id');
+  }
+
+  return author;
+}
 
 function MakeNewQuestion (question, answer, genre, authorName) {
   const questionId = info.question_info.counter;
@@ -476,12 +523,28 @@ function MakeNewOwnership (questionId, authorId) {
 }
 
 function GetQuestionSet (query) {
-  function matchQuery (question) {
+  function matchGenreCheck (question) {
+    // Match to genre
     if (query.genre === 'all') return true;
     return question.genre === query.genre;
   };
 
-  return [...questions].filter(matchQuery);
+  function matchAuthorCheck (question) {
+    // Math to author
+    if (query.authorId === 'all') return true;
+    // Get the author from the questionId
+    try {
+      const author = GetAuthorFromId(question.question_id);
+      const queryAuthorId = parseInt(query.authorId);
+      return author.author_id === queryAuthorId;
+    } catch (e) {
+      console.log('error');
+      return false;
+    }
+  }
+
+  const matchGenre = [...questions].filter(matchGenreCheck);
+  return matchGenre.filter(matchAuthorCheck);
 }
 
 function QuestionScore (question) {

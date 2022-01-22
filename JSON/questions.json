@@ -155,8 +155,8 @@
     "answer": "",
     "genre": "gk",
     "rating": {
-      "likes": 0,
-      "dislikes": 0
+      "likes": 2,
+      "dislikes": 2
     }
   },
   {
@@ -426,7 +426,7 @@
     "genre": "english",
     "rating": {
       "likes": 0,
-      "dislikes": 0
+      "dislikes": 2
     }
   },
   {

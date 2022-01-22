@@ -94,37 +94,75 @@
       </form>
     </div>
     <div id="browse" class="hidden">
-      <h1>Take a look at all the Questions</h1>
+      <h1>Browse Questions and Authors</h1>
       <p id="message" class="hidden"></p>
-      <form action="/get-question-set" method="GET">
-        <label for="genre">Filter Genre:</label>
-        <select name="genre" id="genre"></select>
-        <br>
-        <label for="sort">Sort By:</label>
-        <select name="sort" id="sort"></select>
-        <label for="order">Order By:</label>
-        <select name="order" id="order">
-          <option value="desc">Descending</option>
-          <option value="asc">Ascending</option>
-        </select>
-        <br>
-        <button>See Questions</button>
-      </form>
-      <!--https://getbootstrap.com/docs/4.0/content/tables/-->
-      <table class="table">
-        <thead>
-          <tr>
-            <!--TODO: add author-->
-            <th scope="col">#</th>
-            <th scope="col">Question</th>
-            <th scope="col">Answer</th>
-            <th scope="col">Likes</th>
-            <th scope="col">Dislikes</th>
-          </tr>
-        </thead>
-        <tbody>
-        </tbody>
-      </table>
+      <br>
+      <button>Questions</button>
+      <button>Authors</button>
+      <button>Reset Search</button>
+      <br>
+      <div id="browse_questions">
+        <form action="/get-question-set" method="GET">
+          <label for="genre">Filter Author:</label>
+          <select name="authorId" id="authorName"></select>
+          <label for="genre">Filter Genre:</label>
+          <select name="genre" id="genre"></select>
+          <br>
+          <label for="sort">Sort By:</label>
+          <select name="sort" id="sort"></select>
+          <label for="order">Order By:</label>
+          <select name="order" id="order">
+            <option value="desc">Descending</option>
+            <option value="asc">Ascending</option>
+          </select>
+          <br>
+          <button>See Questions</button>
+        </form>
+        <!--https://getbootstrap.com/docs/4.0/content/tables/-->
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Question</th>
+              <th scope="col">Answer</th>
+              <th scope="col">Author</th>
+              <th scope="col">Likes</th>
+              <th scope="col">Dislikes</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+      <div id="browse_authors" class="hidden">
+        <form action="/get-author-set" method="GET">
+          <label for="genre">Filter Genre:</label>
+          <select name="genre" id="genre"></select>
+          <br>
+          <label for="sort">Sort By:</label>
+          <select name="sort" id="sort"></select>
+          <label for="order">Order By:</label>
+          <select name="order" id="order">
+            <option value="desc">Descending</option>
+            <option value="asc">Ascending</option>
+          </select>
+          <br>
+          <button>See Questions</button>
+        </form>
+        <!--https://getbootstrap.com/docs/4.0/content/tables/-->
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Name</th>
+              <th scope="col"># of Questions</th>
+              <th scope="col">Favourite Genre</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
     </div>
   </body>
 </html>
