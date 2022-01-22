@@ -1,11 +1,18 @@
 module.exports = {
-    extends: 'standard',
-    env: {
-      jest: true,
-      browser: true
-    },
-    rules: {
-      semi: [2, 'always'],
-      indent: 'off'
-    }
+  env: {
+    browser: true,
+    es2021: true,
+    node: true
+  },
+  extends: [
+    'standard'
+  ],
+  parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module'
+  },
+  rules: {
+    semi: [2, 'always'],
+    indent: 'off'
+  }
 };

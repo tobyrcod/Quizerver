@@ -366,7 +366,7 @@ class BrowseAuthors extends Browse {
       // We failed to connect to the server
       return { authorInfoSet: null, error_message: 'Unable to Connect to Server, Please try again' };
     }
-  };
+  }
 }
 
 const browseAreas = {
