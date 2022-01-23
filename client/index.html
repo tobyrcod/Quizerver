@@ -10,119 +10,186 @@
 
     <!--CSS-->
     <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/e89088cfa6.js" crossorigin="anonymous"></script>
     <!--CSS-->
 
     <!--Google Fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500&display=swap" rel="stylesheet">
     <!--Google Fonts-->
 
     <!--Javascript-->
     <script src="script.js" defer></script>
     <script src="quiz.js" defer></script>
     <script src="add_question.js" defer></script>
-    <script src="browse_questions.js" defer></script>
-    <script src="browse_authors.js" defer></script>
+    <script src="browse.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous" defer></script>
     <!--Javascript-->
   </head>
-  <body>
-    <div id="navbar">
-      <button id="btnQuiz">Play the Quiz</button>
-      <button id="btnAdd">Make a new Question</button>
-      <button id="btnBrowse">Browse</button>
-    </div>
+  <body class="bg-green">
+    <nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-light mb-3">
+      <div class="container-fluid">
+        <a class="navbar-brand">Quizerver</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a id="btnQuiz" class="nav-link active" aria-current="page" href="#">Play the Quiz</a>
+            <a id="btnAdd" class="nav-link" href="#">Make a Question</a>
+            <a id="btnBrowse" class="nav-link" href="#">Browse</a>
+          </div>
+        </div>
+      </div>
+    </nav>
     <div id="quiz">
-      <h1 id="top_text">Start the Quiz now!</h1>
-      <p id="error" class="hidden"></p>
-      <div id="setup">
-        <form action="/get-question-set" method="GET">
-          <label for="count">How many questions do you want?: </label>
-          <input type="number" name="count" id="question_count" value="10" min="1" max="10">
-          <br>
-          <label for="genre">What type of questions do you want?:</label>
-          <select name="genre" id="genre"> 
-          </select>
-          <br>
-          <br>
-          <button>Start Quiz</button>
+      <h1 id="top_text" class="text-center">Start the Quiz now!</h1>
+      <hr>
+      <div id="setup" class="mt-5">
+        <form>
+          <p id="top_text" class="text-center fs-3">How many questions do you want?</p>
+          <p id="range_count_output" class="text-center fs-5 text-primary">5</p>
+          <input type="range" name="count"  id="question_count" class="form-range" min="1" max="10" id="customRange2">   
+          <div class="form-floating mt-4">
+            <select name="genre" id="genre" class="form-select" id="floatingSelect" aria-label="Floating label select example">
+            </select>
+            <label for="floatingSelect">Genre</label>
+          </div>
+          <div class="d-grid gap-2 mt-4">
+            <button class="btn btn-primary" type="submit">Start Quiz</button>
+          </div>
         </form>
       </div>
-      <div id="asking" class="hidden">
+      <div id="asking" class="hidden mt-5">
         <div id="front">
-          <p id="question"></p>
-          <p id="author"></p>
+          <p id="question" class="text-center fs-3"></p>
+          <p id="author" class="text-center fs-5 text-primary"></p>
         </div>
         <div id="back" class="hidden">
-          <p id="answer"></p>
+          <p id="answer" class="text-center fs-4"></p>
           <div id="ratings">
-            <div id="likes">
-              <p>[likes amount]</p> 
-              <button>upvote</button>
-            </div>
-            <div id="dislikes">
-              <p>[dislikes amount]</p> 
-              <button>downvote</button>
+            <div class="d-flex justify-content-evenly">
+              <div id="likes" class="d-flex justify-content-center">
+                <p class="align-bottom">3</p>
+                <p>ㅤ</p>
+                <button class="btn btn-success"><i class="fas fa-thumbs-up"></i></button>
+              </div>
+              <div id="dislikes" class="d-flex justify-content-center">
+                <p>3</p>
+                <p>ㅤ</p>
+                <button class="btn btn-danger"><i class="fas fa-thumbs-down"></i></button>
+              </div>
             </div>
           </div>
         </div>
       </div>
       <br>
-      <button id="btn_ask_question" class="hidden">Next Question</button>
-      <button id="btn_reveal_answer" class="hidden">Reveal Answer</button>
-      <button id="btn_end_quiz" class="hidden">End Quiz</button>
+      <div class="d-grid gap-2 col-6 mx-auto">
+        <button id="btn_ask_question" class="hidden btn btn-primary">Next Question</button>
+        <button id="btn_reveal_answer" class="hidden btn btn-primary">Reveal Answer</button>
+        <button id="btn_end_quiz" class="hidden btn btn-dark">End Quiz</button>
+      </div>
+      <p id="error" class="text-center fs-5 mt-3 text-danger hidden"></p>
     </div>
     <div id="add_question" class="hidden">
-      <h1>Add a new Question to the Quiz!</h1>
-      <p>*Required Field</p>
-      <p id="message" class="hidden"></p>
+      <h1 class="text-center">Add a new Question to the Quiz!</h1>
+      <hr>
       <form action="/add-question" method="POST">
-        <label for="question">Question:*</label>
-        <textarea name="question" id="question"></textarea>
-        <br>
-        <label for="answer">Answer:*</label>
-        <textarea name="answer" id="answer"></textarea>
-        <br>
-        <label for="genre">What type of question is this?:</label>
-        <select name="genre" id="genre">
-        </select>
-        <br>
-        <label for="author">Author name: </label>
-        <input type="text" name="authorName" id="authorName">
-        <br>
-        <button>Submit</button>
+        <p id="top_text" class="text-center fs-3">The Important Bits *</p>
+        <div class="row mb-3">
+          <label for="inputEmail3" class="col-sm-2 col-form-label text-center">Question:</label>
+          <div class="col-sm-10">
+            <textarea name="question" id="question" class="form-control" placeholder="What is the Capital City of England?" id="floatingTextarea"></textarea>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label for="inputPassword3" class="col-sm-2 col-form-label text-center">Answer</label>
+          <div class="col-sm-10">
+            <textarea name="answer" id="answer" class="form-control" placeholder="London" id="floatingTextarea"></textarea>
+          </div>
+        </div>
+        <p id="top_text" class="text-center fs-4">... and some nice extras</p>
+        <div class="row g-2">
+          <div class="col-md">
+            <div class="form-floating">
+              <input type="text" name="authorName" id="authorName" class="form-control" id="floatingInputGrid" placeholder="Rick Astley" value="Rick Astley">
+              <label for="floatingInputGrid">Author Name</label>
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="form-floating">
+              <select name="genre" id="genre" class="form-select" id="floatingSelectGrid" aria-label="Floating label select example">
+              </select>
+              <label for="floatingSelectGrid">Genre</label>
+            </div>
+          </div>
+        </div>
+        <div class="d-grid gap-2 mt-4">
+          <button class="btn btn-primary" type="submit">Add Question</button>
+        </div>
       </form>
+      <p id="message" class="text-center fs-5 mt-3 text-danger hidden"></p>
+      <p class="text-center mt-3">*Required</p>
     </div>
     <div id="browse" class="hidden">
-      <h1>Browse Questions and Authors</h1>
-      <p id="message" class="hidden"></p>
-      <br>
-      <button id="question">Questions</button>
-      <button id="author">Authors</button>
-      <button id="reset">Reset</button>
+      <h1 class="text-center">Browse Questions and Authors</h1>
+      <hr>
+      <p id="message" class="text-center fs-5 mt-3 text-danger hidden"></p>
+      <div class="d-flex flex-row justify-content-evenly">
+        <button id="question" type="button" class="btn btn-outline-primary active">Questions</button>
+        <button id="author" type="button" class="btn btn-outline-primary">ㅤAuthorsㅤ</button>
+        <button id="reset" type="button" class="btn btn-outline-danger justify-content-end">ㅤResetㅤ</button>
+      </div>
       <br>
       <div id="browse_questions">
         <form action="/get-question-set" method="GET">
-          <label for="genre">Filter Author:</label>
-          <select name="authorId" id="authorName"></select>
-          <label for="genre">Filter Genre:</label>
-          <select name="genre" id="genre"></select>
-          <br>
-          <label for="sort">Sort By:</label>
-          <select name="sort" id="sort"></select>
-          <label for="order">Order By:</label>
-          <select name="order" id="order">
-            <option value="desc">Descending</option>
-            <option value="asc">Ascending</option>
-          </select>
-          <br>
-          <button>See Questions</button>
+          <p id="top_text" class="text-center fs-3">Tell us what you want</p>
+          <div class="row g-2">
+            <div class="col-md">
+              <div class="form-floating">
+                <select name="authorId" id="authorName" class="form-select" id="floatingSelectGrid" aria-label="Floating label select example">
+                </select>
+                <label for="floatingSelectGrid">Filter Author</label>
+              </div>
+            </div>
+            <div class="col-md">
+              <div class="form-floating">
+                <select name="genre" id="genre" class="form-select" id="floatingSelectGrid" aria-label="Floating label select example">
+                </select>
+                <label for="floatingSelectGrid">Filter Genre</label>
+              </div>
+            </div>
+          </div>
+          <p id="top_text" class="text-center fs-4 mt-3">Tell us how you want it</p>
+          <div class="row g-2">
+            <div class="col-md">
+              <div class="form-floating">
+                <select name="sort" id="sort" class="form-select" id="floatingSelectGrid" aria-label="Floating label select example">
+                </select>
+                <label for="floatingSelectGrid">Sort By</label>
+              </div>
+            </div>
+            <div class="col-md">
+              <div class="form-floating">
+                <select name="order" id="order" class="form-select" id="floatingSelectGrid" aria-label="Floating label select example">
+                  <option value="desc">Descending</option>
+                  <option value="asc">Ascending</option>
+                </select>
+                <label for="floatingSelectGrid">Order By</label>
+              </div>
+            </div>
+          </div>
+          <div class="d-grid gap-2 mt-4">
+            <button class="btn btn-primary" type="submit">Show Question</button>
+          </div>
         </form>
         <!--https://getbootstrap.com/docs/4.0/content/tables/-->
-        <table>
+        <table class="table table-primary table-striped">
           <thead>
             <tr>
-              <th scope="col">#</th>
+              <th scope="col"></th>
               <th scope="col">Question</th>
               <th scope="col">Answer</th>
               <th scope="col">Author</th>
@@ -136,26 +203,46 @@
       </div>
       <div id="browse_authors" class="hidden">
         <form action="/get-author-set" method="GET">
-          <label for="genre">Filter Author:</label>
-          <select name="authorId" id="authorName"></select>
-          <br>
-          <label for="sort">Sort By:</label>
-          <select name="sort" id="sort"></select>
-          <label for="order">Order By:</label>
-          <select name="order" id="order">
-            <option value="desc">Descending</option>
-            <option value="asc">Ascending</option>
-          </select>
-          <br>
-          <button>See Authors</button>
+          <p id="top_text" class="text-center fs-3">Tell us what you want</p>
+          <div class="row g-2">
+            <div class="col-md">
+              <div class="form-floating">
+                <select name="authorId" id="authorName" class="form-select" id="floatingSelectGrid" aria-label="Floating label select example">
+                </select>
+                <label for="floatingSelectGrid">Filter Author</label>
+              </div>
+            </div>
+          </div>
+          <p id="top_text" class="text-center fs-4 mt-3">Tell us how you want it</p>
+          <div class="row g-2">
+            <div class="col-md">
+              <div class="form-floating">
+                <select name="sort" id="sort" class="form-select" id="floatingSelectGrid" aria-label="Floating label select example">
+                </select>
+                <label for="floatingSelectGrid">Sort By</label>
+              </div>
+            </div>
+            <div class="col-md">
+              <div class="form-floating">
+                <select name="order" id="order" class="form-select" id="floatingSelectGrid" aria-label="Floating label select example">
+                  <option value="desc">Descending</option>
+                  <option value="asc">Ascending</option>
+                </select>
+                <label for="floatingSelectGrid">Order By</label>
+              </div>
+            </div>
+          </div>
+          <div class="d-grid gap-2 mt-4">
+            <button class="btn btn-primary" type="submit">Show Authors</button>
+          </div>
         </form>
         <!--https://getbootstrap.com/docs/4.0/content/tables/-->
-        <table>
+        <table class="table table-primary table-striped">
           <thead>
             <tr>
-              <th scope="col">#</th>
+              <th scope="col"></th>
               <th scope="col">Name</th>
-              <th scope="col"># of Questions</th>
+              <th scope="col"># Questions</th>
               <th scope="col">Favourite Genre</th>
               <th scope="col">Author Score</th>
             </tr>

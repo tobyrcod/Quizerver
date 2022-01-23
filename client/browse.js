@@ -394,6 +394,11 @@ const browseDivs = {
 const btnQuestions = dBrowse.querySelector('button#question');
 const btnAuthors = dBrowse.querySelector('button#author');
 
+const browseButtons = {
+  questions: btnQuestions,
+  authors: btnAuthors
+};
+
 const btnReset = dBrowse.querySelector('button#reset');
 btnReset.addEventListener('click', (event) => {
   browseQuestions.Reset();
@@ -423,5 +428,6 @@ function ShowBrowse (browseArea) {
   for (const key in browseStates) {
     console.log(key);
     browseDivs[key].classList.toggle('hidden', !browseStates[key]);
+    browseButtons[key].classList.toggle('active', browseStates[key]);
   }
 }

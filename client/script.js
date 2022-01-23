@@ -25,6 +25,12 @@ const contentDivs = {
   browse: divBrowse
 };
 
+const contentButtons = {
+  quiz: btnQuiz,
+  add: btnAdd,
+  browse: btnBrowse
+};
+
 window.addEventListener('DOMContentLoaded', async function (event) {
   btnQuiz.addEventListener('click', () => ShowContent(contentAreas.quiz));
   btnAdd.addEventListener('click', () => ShowContent(contentAreas.add));
@@ -41,5 +47,6 @@ function ShowContent (contentArea) {
 
   for (const key in contentStates) {
     contentDivs[key].classList.toggle('hidden', !contentStates[key]);
+    contentButtons[key].classList.toggle('active', contentStates[key]);
   }
 }

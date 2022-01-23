@@ -595,6 +595,8 @@ app.post('/downvote/:id', (req, res) => {
 
 // POST request handler for when the user is submitting a
 // new question to be added to the 'database'
+// also creates a new author if it doesn't alreaydy exist
+// and ownership of the question
 // Returns status: 200 or 400
 app.post('/add-question/', (req, res) => {
   // Get the data sent via the form encoded in the query

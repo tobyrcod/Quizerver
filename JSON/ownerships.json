@@ -358,5 +358,30 @@
     "ownership_id": 71,
     "question_id": 71,
     "author_id": 14
+  },
+  {
+    "ownership_id": 72,
+    "question_id": 72,
+    "author_id": 17
+  },
+  {
+    "ownership_id": 73,
+    "question_id": 73,
+    "author_id": 14
+  },
+  {
+    "ownership_id": 74,
+    "question_id": 74,
+    "author_id": 18
+  },
+  {
+    "ownership_id": 75,
+    "question_id": 75,
+    "author_id": 18
+  },
+  {
+    "ownership_id": 76,
+    "question_id": 76,
+    "author_id": 18
   }
 ]

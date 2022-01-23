@@ -44,6 +44,8 @@ class QuizUI {
 
     this.frmQuizSetup = divQuiz.querySelector('#setup form');
     this.selectGenre = this.frmQuizSetup.querySelector('select');
+    this.rangeCount = this.frmQuizSetup.querySelector('#question_count');
+    this.rangeCountOutput = this.frmQuizSetup.querySelector('#range_count_output');
   };
 
   // Sets up the Quiz UI and connect it to the quiz logic
@@ -51,6 +53,11 @@ class QuizUI {
   Initialise (quiz) {
     // Load the Genres
     this.LoadGenres();
+
+    this.rangeCountOutput.innerHTML = this.rangeCount.value;
+    this.rangeCount.addEventListener('input', () => {
+      this.rangeCountOutput.innerHTML = this.rangeCount.value;
+    }, false);
 
     // UI Responce to Events
     // On Ask Question Event
@@ -218,6 +225,7 @@ class QuizUI {
     this.txtTopText.innerHTML = 'Start the Quiz now!';
     this.txtError.classList.add('hidden');
     this.txtError.innerHTML = '';
+    this.rangeCountOutput.innerHTML = this.rangeCount.value;
   };
 };
 

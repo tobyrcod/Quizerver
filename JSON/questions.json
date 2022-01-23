@@ -5,8 +5,8 @@
     "answer": "a",
     "genre": "gk",
     "rating": {
-      "likes": 137,
-      "dislikes": 92
+      "likes": 141,
+      "dislikes": 96
     },
     "authorName": "a"
   },
@@ -170,8 +170,8 @@
     "answer": "",
     "genre": "gk",
     "rating": {
-      "likes": 2,
-      "dislikes": 2
+      "likes": 6,
+      "dislikes": 6
     },
     "authorName": "n/a"
   },
@@ -313,7 +313,7 @@
     "answer": "",
     "genre": "gk",
     "rating": {
-      "likes": 1,
+      "likes": 5,
       "dislikes": 0
     },
     "authorName": "n/a"
@@ -523,7 +523,7 @@
     "genre": "gk",
     "rating": {
       "likes": 0,
-      "dislikes": 0
+      "dislikes": 1
     },
     "authorName": "unknown"
   },
@@ -544,8 +544,8 @@
     "answer": "rrr",
     "genre": "gk",
     "rating": {
-      "likes": 0,
-      "dislikes": 0
+      "likes": 2,
+      "dislikes": 2
     },
     "authorName": "unknown"
   },
@@ -578,7 +578,7 @@
     "genre": "math",
     "rating": {
       "likes": 0,
-      "dislikes": 0
+      "dislikes": 1
     },
     "authorName": "jest"
   },
@@ -676,8 +676,8 @@
     "answer": "1222",
     "genre": "math",
     "rating": {
-      "likes": 0,
-      "dislikes": 0
+      "likes": 6,
+      "dislikes": 8
     },
     "authorName": "jest"
   },
@@ -687,8 +687,8 @@
     "answer": "891",
     "genre": "math",
     "rating": {
-      "likes": 0,
-      "dislikes": 0
+      "likes": 3,
+      "dislikes": 2
     },
     "authorName": "jest"
   },
@@ -731,8 +731,8 @@
     "answer": "1145",
     "genre": "math",
     "rating": {
-      "likes": 0,
-      "dislikes": 0
+      "likes": 25,
+      "dislikes": 15
     },
     "authorName": "jest"
   },
@@ -764,8 +764,8 @@
     "answer": "305",
     "genre": "math",
     "rating": {
-      "likes": 0,
-      "dislikes": 0
+      "likes": 3,
+      "dislikes": 4
     },
     "authorName": "unknown"
   },
@@ -775,15 +775,69 @@
     "answer": "1221",
     "genre": "math",
     "rating": {
-      "likes": 0,
-      "dislikes": 0
-    }
+      "likes": 2,
+      "dislikes": 2
+    },
+    "authorName": "jest"
   },
   {
     "question_id": 71,
     "question": "What is 461 plus 311?",
     "answer": "772",
     "genre": "math",
+    "rating": {
+      "likes": 0,
+      "dislikes": 0
+    },
+    "authorName": "unknown"
+  },
+  {
+    "question_id": 72,
+    "question": "What is 515 plus 650?",
+    "answer": "1165",
+    "genre": "math",
+    "rating": {
+      "likes": 0,
+      "dislikes": 0
+    },
+    "authorName": "jest"
+  },
+  {
+    "question_id": 73,
+    "question": "What is 469 plus 579?",
+    "answer": "1048",
+    "genre": "math",
+    "rating": {
+      "likes": 0,
+      "dislikes": 0
+    },
+    "authorName": "unknown"
+  },
+  {
+    "question_id": 74,
+    "question": "What is 5+5?",
+    "answer": "10",
+    "genre": "math",
+    "rating": {
+      "likes": 0,
+      "dislikes": 0
+    }
+  },
+  {
+    "question_id": 75,
+    "question": "sf",
+    "answer": "sf",
+    "genre": "english",
+    "rating": {
+      "likes": 0,
+      "dislikes": 0
+    }
+  },
+  {
+    "question_id": 76,
+    "question": "sfg",
+    "answer": "sfggg",
+    "genre": "gk",
     "rating": {
       "likes": 0,
       "dislikes": 0
