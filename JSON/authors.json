@@ -1,90 +1,26 @@
 [
   {
     "author_id": 0,
-    "name": "Mr. Red",
-    "question_count": 6,
-    "favourite_genre": "Geography",
-    "author_score": -3
+    "name": "Mr. Blue"
   },
   {
     "author_id": 1,
-    "name": "Mr. Green",
-    "question_count": 3,
-    "favourite_genre": "Math",
-    "author_score": 2
+    "name": "Mr. Red"
   },
   {
     "author_id": 2,
-    "name": "Mr. Wrong",
-    "question_count": 3,
-    "favourite_genre": "Math",
-    "author_score": 0
+    "name": "Mr. Green"
   },
   {
     "author_id": 3,
-    "name": "Mr. Annoying",
-    "question_count": 3,
-    "favourite_genre": "Math",
-    "author_score": 0
+    "name": "Mr. Nobel"
   },
   {
     "author_id": 4,
-    "name": "Rick Astley",
-    "question_count": 4,
-    "favourite_genre": "History",
-    "author_score": 0
+    "name": "Mr. Wrong"
   },
   {
     "author_id": 5,
-    "name": "Mr. Ramsey",
-    "question_count": 2,
-    "favourite_genre": "General Knowledge",
-    "author_score": 0
-  },
-  {
-    "author_id": 6,
-    "name": "Mr. Antandec",
-    "question_count": 2,
-    "favourite_genre": "General Knowledge",
-    "author_score": 0
-  },
-  {
-    "author_id": 7,
-    "name": "Mr. Daley",
-    "question_count": 3,
-    "favourite_genre": "General Knowledge",
-    "author_score": 0
-  },
-  {
-    "author_id": 8,
-    "name": "Mr. Nobel",
-    "question_count": 4,
-    "favourite_genre": "Computer Science",
-    "author_score": 1
-  },
-  {
-    "author_id": 9,
-    "name": "Mr. Postman",
-    "question_count": 1,
-    "favourite_genre": "Other",
-    "author_score": 0
-  },
-  {
-    "author_id": 10,
-    "name": "unknown",
-    "question_count": 2,
-    "favourite_genre": "Other",
-    "author_score": 0
-  },
-  {
-    "author_id": 11,
-    "name": "jest",
-    "question_count": 1,
-    "favourite_genre": "Math",
-    "author_score": 0
-  },
-  {
-    "author_id": 12,
-    "name": "Fred"
+    "name": "Mr. Astley"
   }
 ]

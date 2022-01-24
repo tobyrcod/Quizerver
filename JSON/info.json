@@ -1,6 +1,6 @@
 {
   "question_info": {
-    "counter": 35,
+    "counter": 27,
     "genres": [
       {
         "id": "gk",
@@ -51,7 +51,7 @@
     ]
   },
   "author_info": {
-    "counter": 13,
+    "counter": 6,
     "sorts": [
       {
         "id": "count",
@@ -68,6 +68,6 @@
     ]
   },
   "ownership_info": {
-    "counter": 35
+    "counter": 27
   }
 }

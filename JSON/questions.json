@@ -1,113 +1,103 @@
 [
   {
     "question_id": 0,
-    "question": "What is 3 x 4?",
-    "answer": "12",
-    "genre": "math",
-    "rating": {
-      "likes": 6,
-      "dislikes": 8
-    },
-    "authorName": "Mr. Red"
-  },
-  {
-    "question_id": 1,
-    "question": "What is 11 x 11?",
-    "answer": "121",
-    "genre": "math",
-    "rating": {
-      "likes": 4,
-      "dislikes": 1
-    },
-    "authorName": "Mr. Green"
-  },
-  {
-    "question_id": 2,
-    "question": "What is 18 / 3?",
-    "answer": "6",
-    "genre": "math",
-    "rating": {
-      "likes": 0,
-      "dislikes": 0
-    },
-    "authorName": "Mr. Red"
-  },
-  {
-    "question_id": 3,
-    "question": "What is the square root of 64?",
-    "answer": "7",
-    "genre": "math",
-    "rating": {
-      "likes": 0,
-      "dislikes": 1
-    },
-    "authorName": "Mr. Wrong"
-  },
-  {
-    "question_id": 4,
-    "question": "What is pi to 39 decimal places?",
-    "answer": "3.141592653589793238462643383279502884197",
-    "genre": "math",
-    "rating": {
-      "likes": 0,
-      "dislikes": 0
-    },
-    "authorName": "Mr. Annoying"
-  },
-  {
-    "question_id": 5,
     "question": "Who was British Prime Minister before Theresa May?",
     "answer": "David Cameron",
     "genre": "gk",
     "rating": {
       "likes": 0,
-      "dislikes": 0
-    },
-    "authorName": "Rick Astley"
+      "dislikes": 1
+    }
   },
   {
-    "question_id": 6,
+    "question_id": 1,
     "question": "What nut is used to make marzipan?",
     "answer": "Almonds",
     "genre": "gk",
     "rating": {
-      "likes": 0,
-      "dislikes": 0
-    },
-    "authorName": "Mr. Ramsey"
+      "likes": 4,
+      "dislikes": 2
+    }
   },
   {
-    "question_id": 7,
-    "question": "Who won I'm A Celebrity... Get Me Out Of Here! in 2019?",
-    "answer": "Jacqueline Jossa",
+    "question_id": 2,
+    "question": "What is the Capital of England?",
+    "answer": "London",
     "genre": "gk",
     "rating": {
-      "likes": 0,
+      "likes": 6,
       "dislikes": 0
-    },
-    "authorName": "Mr. Antandec"
+    }
   },
   {
-    "question_id": 8,
+    "question_id": 3,
+    "question": "What is 2+2=?",
+    "answer": "4",
+    "genre": "math",
+    "rating": {
+      "likes": 0,
+      "dislikes": 5
+    }
+  },
+  {
+    "question_id": 4,
     "question": "In meters, how long is an Olympic swimming pool?",
     "answer": "50",
     "genre": "gk",
     "rating": {
       "likes": 0,
       "dislikes": 0
-    },
-    "authorName": "Mr. Daley"
+    }
   },
   {
-    "question_id": 9,
+    "question_id": 5,
     "question": "Is P = NP?",
     "answer": "Obviously, but this answer box is too small to contain my workings",
-    "genre": "comp",
+    "genre": "math",
     "rating": {
       "likes": 0,
       "dislikes": 0
-    },
-    "authorName": "Mr. Nobel"
+    }
+  },
+  {
+    "question_id": 6,
+    "question": "What is 11 x 11?",
+    "answer": "121",
+    "genre": "math",
+    "rating": {
+      "likes": 0,
+      "dislikes": 0
+    }
+  },
+  {
+    "question_id": 7,
+    "question": "What is 18 / 3?",
+    "answer": "6",
+    "genre": "math",
+    "rating": {
+      "likes": 0,
+      "dislikes": 0
+    }
+  },
+  {
+    "question_id": 8,
+    "question": "What is the square root of 64?",
+    "answer": "7",
+    "genre": "math",
+    "rating": {
+      "likes": 0,
+      "dislikes": 0
+    }
+  },
+  {
+    "question_id": 9,
+    "question": "Who won I'm A Celebrity... Get Me Out Of Here! in 2019?",
+    "answer": "Jacqueline Jossa",
+    "genre": "gk",
+    "rating": {
+      "likes": 0,
+      "dislikes": 0
+    }
   },
   {
     "question_id": 10,
@@ -116,272 +106,167 @@
     "genre": "comp",
     "rating": {
       "likes": 0,
-      "dislikes": 1
-    },
-    "authorName": "Mr. Red"
+      "dislikes": 0
+    }
   },
   {
     "question_id": 11,
-    "question": "What is the optimal number of colours needed to colour a crown graph?",
-    "answer": "2",
-    "genre": "comp",
-    "rating": {
-      "likes": 2,
-      "dislikes": 0
-    },
-    "authorName": "Mr. Green"
-  },
-  {
-    "question_id": 12,
-    "question": "What is the connection between Vertices and a Vertex?",
-    "answer": "A Vertex is the singular form of a collection of Vertices",
-    "genre": "comp",
-    "rating": {
-      "likes": 1,
-      "dislikes": 0
-    },
-    "authorName": "Mr. Nobel"
-  },
-  {
-    "question_id": 13,
-    "question": "What does eclampsia mean?",
-    "answer": "a form of toxemia of pregnancy, characterized by albuminuria, hypertension, and convulsions",
-    "genre": "english",
-    "rating": {
-      "likes": 0,
-      "dislikes": 0
-    },
-    "authorName": "Mr. Wrong"
-  },
-  {
-    "question_id": 14,
-    "question": "Never going to give you _ ?",
-    "answer": "up... (sorry)",
-    "genre": "english",
-    "rating": {
-      "likes": 0,
-      "dislikes": 0
-    },
-    "authorName": "Rick Astley"
-  },
-  {
-    "question_id": 15,
-    "question": "This essential gas is important so that we can breath",
-    "answer": "Oxygen",
-    "genre": "sci",
-    "rating": {
-      "likes": 0,
-      "dislikes": 0
-    },
-    "authorName": "Mr. Green"
-  },
-  {
-    "question_id": 16,
-    "question": "What is the nearest planet to the sun?",
-    "answer": "Mercury",
-    "genre": "sci",
-    "rating": {
-      "likes": 0,
-      "dislikes": 0
-    },
-    "authorName": "Mr. Daley"
-  },
-  {
-    "question_id": 17,
-    "question": "How many teeth does an adult human have?",
-    "answer": "32",
-    "genre": "sci",
-    "rating": {
-      "likes": 0,
-      "dislikes": 0
-    },
-    "authorName": "Mr. Annoying"
-  },
-  {
-    "question_id": 18,
-    "question": "What do bees collect and use to create honey?",
-    "answer": "Nectar",
-    "genre": "sci",
-    "rating": {
-      "likes": 0,
-      "dislikes": 0
-    },
-    "authorName": "Mr. Nobel"
-  },
-  {
-    "question_id": 19,
-    "question": "Who was prime minister of the UK for most of the Second World War?",
-    "answer": "Winston Churchill",
-    "genre": "hist",
-    "rating": {
-      "likes": 0,
-      "dislikes": 0
-    },
-    "authorName": "Mr. Antandec"
-  },
-  {
-    "question_id": 20,
-    "question": "Who was caught red-handed trying to blow up parliament in 1605?",
-    "answer": "Guy Fawkes",
-    "genre": "hist",
-    "rating": {
-      "likes": 0,
-      "dislikes": 0
-    },
-    "authorName": "Rick Astley"
-  },
-  {
-    "question_id": 21,
-    "question": "How many wives did Henry VIII have?",
-    "answer": "Six",
-    "genre": "hist",
-    "rating": {
-      "likes": 0,
-      "dislikes": 0
-    },
-    "authorName": "Rick Astley"
-  },
-  {
-    "question_id": 22,
-    "question": "Which is the largest country in the world?",
-    "answer": "Russia",
-    "genre": "geog",
-    "rating": {
-      "likes": 0,
-      "dislikes": 0
-    },
-    "authorName": "Mr. Red"
-  },
-  {
-    "question_id": 23,
-    "question": "What are the names of the five oceans?",
-    "answer": "Pacific, Atlantic, Indian, Arctic and Southern",
-    "genre": "geog",
-    "rating": {
-      "likes": 0,
-      "dislikes": 0
-    },
-    "authorName": "Mr. Red"
-  },
-  {
-    "question_id": 24,
-    "question": "What is the capital city of India?",
-    "answer": "New Delhi",
-    "genre": "geog",
-    "rating": {
-      "likes": 0,
-      "dislikes": 0
-    },
-    "authorName": "Mr. Red"
-  },
-  {
-    "question_id": 25,
-    "question": "In which country would you find the Leaning Tower of Pisa?",
-    "answer": "Spain",
-    "genre": "geog",
-    "rating": {
-      "likes": 0,
-      "dislikes": 0
-    },
-    "authorName": "Mr. Wrong"
-  },
-  {
-    "question_id": 26,
-    "question": "Which famous painter was also a sculptor, an architect, and an engineer?",
-    "answer": "Leonardo Da Vinci",
-    "genre": "art",
-    "rating": {
-      "likes": 0,
-      "dislikes": 0
-    },
-    "authorName": "Mr. Daley"
-  },
-  {
-    "question_id": 27,
-    "question": "The artist Kandinsky is considered the first for this type of art?",
-    "answer": "Abstract",
-    "genre": "art",
-    "rating": {
-      "likes": 0,
-      "dislikes": 0
-    },
-    "authorName": "Mr. Ramsey"
-  },
-  {
-    "question_id": 28,
     "question": "Claude Monet is most known for his paintings of what?",
     "answer": "Water lilies",
     "genre": "art",
     "rating": {
       "likes": 0,
       "dislikes": 0
-    },
-    "authorName": "Mr. Annoying"
+    }
   },
   {
-    "question_id": 29,
+    "question_id": 12,
     "question": "Who was the first living person to have their art displayed in The Louvre?",
     "answer": "Georges Braque",
     "genre": "art",
     "rating": {
       "likes": 0,
       "dislikes": 0
-    },
-    "authorName": "Mr. Nobel"
+    }
   },
   {
-    "question_id": 30,
-    "question": "How do you post a question to the server? ",
-    "answer": "Like this!",
-    "genre": "other",
+    "question_id": 13,
+    "question": "The artist Kandinsky is considered the first for this type of art?",
+    "answer": "Abstract",
+    "genre": "art",
     "rating": {
       "likes": 0,
       "dislikes": 0
-    },
-    "authorName": "Mr. Postman"
+    }
   },
   {
-    "question_id": 31,
-    "question": "Can I add questions without an author?",
-    "answer": "Sure!",
-    "genre": "other",
+    "question_id": 14,
+    "question": "Which famous painter was also a sculptor, an architect, and an engineer?",
+    "answer": "Leonardo DiCaprio",
+    "genre": "art",
     "rating": {
       "likes": 0,
       "dislikes": 0
-    },
-    "authorName": "unknown"
+    }
   },
   {
-    "question_id": 32,
-    "question": "What is 470 plus 58?",
-    "answer": "528",
-    "genre": "math",
+    "question_id": 15,
+    "question": "In which country would you find the Leaning Tower of Pisa?",
+    "answer": "Spain",
+    "genre": "geog",
     "rating": {
       "likes": 0,
       "dislikes": 0
-    },
-    "authorName": "jest"
+    }
   },
   {
-    "question_id": 33,
-    "question": "What is 346 plus 395?",
-    "answer": "741",
-    "genre": "math",
+    "question_id": 16,
+    "question": "What is the capital city of India?",
+    "answer": "New Delhi",
+    "genre": "geog",
     "rating": {
       "likes": 0,
       "dislikes": 0
-    },
-    "authorName": "unknown"
+    }
   },
   {
-    "question_id": 34,
-    "question": "What is Unity?",
-    "answer": "A 3D Game Engine",
-    "genre": "comp",
+    "question_id": 17,
+    "question": "What are the names of the five oceans?",
+    "answer": "Pacific, Atlantic, Indian, Arctic and Southern",
+    "genre": "geog",
     "rating": {
       "likes": 0,
       "dislikes": 0
-    },
-    "authorName": "Fred"
+    }
+  },
+  {
+    "question_id": 18,
+    "question": "Which is the largest country in the world?",
+    "answer": "Russia",
+    "genre": "geog",
+    "rating": {
+      "likes": 0,
+      "dislikes": 0
+    }
+  },
+  {
+    "question_id": 19,
+    "question": "How many wives did Henry VIII have?",
+    "answer": "Six",
+    "genre": "hist",
+    "rating": {
+      "likes": 0,
+      "dislikes": 0
+    }
+  },
+  {
+    "question_id": 20,
+    "question": "Who was caught red-handed trying to blow up parliament in 1605?",
+    "answer": "Guy Ritchie",
+    "genre": "hist",
+    "rating": {
+      "likes": 0,
+      "dislikes": 0
+    }
+  },
+  {
+    "question_id": 21,
+    "question": "Who was prime minister of the UK for most of the Second World War?",
+    "answer": "Winston Churchill",
+    "genre": "hist",
+    "rating": {
+      "likes": 0,
+      "dislikes": 0
+    }
+  },
+  {
+    "question_id": 22,
+    "question": "What do bees collect and use to create honey?",
+    "answer": "Nectar",
+    "genre": "sci",
+    "rating": {
+      "likes": 0,
+      "dislikes": 0
+    }
+  },
+  {
+    "question_id": 23,
+    "question": "How many teeth does an adult human have?",
+    "answer": "32",
+    "genre": "sci",
+    "rating": {
+      "likes": 0,
+      "dislikes": 0
+    }
+  },
+  {
+    "question_id": 24,
+    "question": "What is the nearest planet to the sun?",
+    "answer": "Mercury",
+    "genre": "sci",
+    "rating": {
+      "likes": 0,
+      "dislikes": 0
+    }
+  },
+  {
+    "question_id": 25,
+    "question": "This essential gas is important so that we can breath",
+    "answer": "Oxygen",
+    "genre": "sci",
+    "rating": {
+      "likes": 0,
+      "dislikes": 0
+    }
+  },
+  {
+    "question_id": 26,
+    "question": "Never going to give you _ ?",
+    "answer": "up (...sorry)",
+    "genre": "english",
+    "rating": {
+      "likes": 0,
+      "dislikes": 0
+    }
   }
 ]

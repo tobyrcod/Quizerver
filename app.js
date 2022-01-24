@@ -109,7 +109,8 @@ app.get('/get-question-info-set/', (req, res) => {
     // The query is valid
 
     // Get all the JSON questions that match the query
-    const questionSet = GetQuestionSet(query);
+    let questionSet = GetQuestionSet(query);
+    questionSet = _.cloneDeep(questionSet);
 
     // Sort the questions
     if (query.sort === 'alpha') {
@@ -225,7 +226,8 @@ app.get('/get-author-info-set/', (req, res) => {
     // The query is valid
 
     // Get all the JSON authors that match the query
-    const authorsSet = GetAuthorSet(query);
+    let authorsSet = GetAuthorSet(query);
+    authorsSet = _.cloneDeep(authorsSet);
     // Perform the needed calculations on the authors
     // to work out the desired information so we can sort them
     const authorsInfoSet = [];
