@@ -1,129 +1,90 @@
 [
   {
     "author_id": 0,
-    "name": "a",
-    "question_count": 1,
-    "favourite_genre": "General Knowledge",
-    "author_score": 45
+    "name": "Mr. Red",
+    "question_count": 6,
+    "favourite_genre": "Geography",
+    "author_score": -3
   },
   {
     "author_id": 1,
-    "name": "c",
-    "question_count": 1,
-    "favourite_genre": "General Knowledge",
-    "author_score": 6
+    "name": "Mr. Green",
+    "question_count": 3,
+    "favourite_genre": "Math",
+    "author_score": 2
   },
   {
     "author_id": 2,
-    "name": "v",
-    "question_count": 1,
-    "favourite_genre": "General Knowledge",
-    "author_score": 7
+    "name": "Mr. Wrong",
+    "question_count": 3,
+    "favourite_genre": "Math",
+    "author_score": 0
   },
   {
     "author_id": 3,
-    "name": "b",
-    "question_count": 1,
-    "favourite_genre": "General Knowledge",
-    "author_score": 13
+    "name": "Mr. Annoying",
+    "question_count": 3,
+    "favourite_genre": "Math",
+    "author_score": 0
   },
   {
     "author_id": 4,
-    "name": "k",
-    "question_count": 1,
-    "favourite_genre": "General Knowledge",
-    "author_score": -2
+    "name": "Rick Astley",
+    "question_count": 4,
+    "favourite_genre": "History",
+    "author_score": 0
   },
   {
     "author_id": 5,
-    "name": "q",
-    "question_count": 1,
+    "name": "Mr. Ramsey",
+    "question_count": 2,
     "favourite_genre": "General Knowledge",
-    "author_score": -11
+    "author_score": 0
   },
   {
     "author_id": 6,
-    "name": "z",
-    "question_count": 1,
+    "name": "Mr. Antandec",
+    "question_count": 2,
     "favourite_genre": "General Knowledge",
-    "author_score": 2
+    "author_score": 0
   },
   {
     "author_id": 7,
-    "name": "d",
-    "question_count": 1,
-    "favourite_genre": "General Knowledge",
-    "author_score": 2
-  },
-  {
-    "author_id": 8,
-    "name": "n/a",
-    "question_count": 34,
-    "favourite_genre": "General Knowledge",
-    "author_score": 26
-  },
-  {
-    "author_id": 9,
-    "name": "fg",
-    "question_count": 1,
-    "favourite_genre": "English",
-    "author_score": -2
-  },
-  {
-    "author_id": 10,
-    "name": "444",
-    "question_count": 1,
-    "favourite_genre": "General Knowledge",
-    "author_score": 0
-  },
-  {
-    "author_id": 11,
-    "name": "g`sdg`sdg",
-    "question_count": 1,
-    "favourite_genre": "General Knowledge",
-    "author_score": 3
-  },
-  {
-    "author_id": 12,
-    "name": "steven",
-    "question_count": 1,
-    "favourite_genre": "Other",
-    "author_score": 0
-  },
-  {
-    "author_id": 13,
-    "name": "sleep deprivation",
-    "question_count": 1,
-    "favourite_genre": "Other",
-    "author_score": 8
-  },
-  {
-    "author_id": 14,
-    "name": "unknown",
+    "name": "Mr. Daley",
     "question_count": 3,
     "favourite_genre": "General Knowledge",
     "author_score": 0
   },
   {
-    "author_id": 15,
-    "name": "ert",
+    "author_id": 8,
+    "name": "Mr. Nobel",
+    "question_count": 4,
+    "favourite_genre": "Computer Science",
+    "author_score": 1
+  },
+  {
+    "author_id": 9,
+    "name": "Mr. Postman",
     "question_count": 1,
-    "favourite_genre": "English",
+    "favourite_genre": "Other",
     "author_score": 0
   },
   {
-    "author_id": 16,
-    "name": "tobebbebebe",
-    "question_count": 1,
-    "favourite_genre": "General Knowledge",
+    "author_id": 10,
+    "name": "unknown",
+    "question_count": 2,
+    "favourite_genre": "Other",
     "author_score": 0
   },
   {
-    "author_id": 17,
-    "name": "jest"
+    "author_id": 11,
+    "name": "jest",
+    "question_count": 1,
+    "favourite_genre": "Math",
+    "author_score": 0
   },
   {
-    "author_id": 18,
-    "name": "Rick Astley"
+    "author_id": 12,
+    "name": "Fred"
   }
 ]

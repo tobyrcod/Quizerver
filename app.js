@@ -185,7 +185,6 @@ app.get('/get-question-info-set/', (req, res) => {
 app.get('/get-author-info-set/', (req, res) => {
   // Get the data from the request via the query
   const query = req.query;
-  console.log(query);
   // See if the request is valid
   try {
     // Test to make sure the query has an author
@@ -304,11 +303,9 @@ app.get('/get-author-info-set/', (req, res) => {
 
     // Return the question set to the user
     res.header('Content-Type', 'application/json');
-    console.log(authorsInfoSet);
     res.status(200).json(authorsInfoSet);
   } catch (e) {
     // The query isn't valid to make a new question
-    console.log(e.message);
     // We have a Bad Request
     // return the appropriate status error code and message
     res.header('Content-Type', 'application/json');
@@ -324,7 +321,6 @@ app.get('/get-author-info-set/', (req, res) => {
 app.get('/get-question-id-set/', (req, res) => {
   // Get all the JSON questions that match the query
   const query = req.query;
-  console.log(query);
   // See if the request is valid
   try {
     // Test to make sure the query has a question genre

@@ -183,7 +183,6 @@ class BrowseQuestions extends Browse {
     // Try to get all the questions that match this query
     try {
       // Get the set of question infos based on the parameters
-      console.log(params.toString());
       const responce = await fetch('/get-question-info-set?' + params);
       // If we succesfully retrieved a question set
       if (responce.status === 200) {
@@ -424,9 +423,7 @@ function ShowBrowse (browseArea) {
   }
 
   browseStates[browseArea] = true;
-  console.log(browseStates);
   for (const key in browseStates) {
-    console.log(key);
     browseDivs[key].classList.toggle('hidden', !browseStates[key]);
     browseButtons[key].classList.toggle('active', browseStates[key]);
   }

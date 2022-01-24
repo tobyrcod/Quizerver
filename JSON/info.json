@@ -1,6 +1,6 @@
 {
   "question_info": {
-    "counter": 77,
+    "counter": 35,
     "genres": [
       {
         "id": "gk",
@@ -11,8 +11,28 @@
         "text": "Math"
       },
       {
+        "id": "comp",
+        "text": "Computer Science"
+      },
+      {
         "id": "english",
         "text": "English"
+      },
+      {
+        "id": "sci",
+        "text": "Science"
+      },
+      {
+        "id": "hist",
+        "text": "History"
+      },
+      {
+        "id": "geog",
+        "text": "Geography"
+      },
+      {
+        "id": "art",
+        "text": "Art"
       },
       {
         "id": "other",
@@ -31,7 +51,7 @@
     ]
   },
   "author_info": {
-    "counter": 19,
+    "counter": 13,
     "sorts": [
       {
         "id": "count",
@@ -48,6 +68,6 @@
     ]
   },
   "ownership_info": {
-    "counter": 77
+    "counter": 35
   }
 }
